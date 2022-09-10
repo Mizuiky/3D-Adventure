@@ -2,47 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+public class StateMachine<T> where T : System.Enum
 {
     private StateBase _currentState;
+    private T _currentStateType;
 
-    public enum States
+    public Dictionary<T, StateBase> statesDictionary;
+
+    public T CurrentStateType
     {
-        NONE
+        get => _currentStateType;
     }
 
-    private Dictionary<States, StateBase> gameStates;
+    /* this script that is not inherited from Monobehaviour,
+    shows a uncoupled state machine, any kind of game component
+    can have your own state machine according with it own
+    enum( that is the generic T ) */
 
-    private void Awake()
+    public void Init()
     {
-        gameStates = new Dictionary<States, StateBase>();
-        gameStates.Add(States.NONE, new StateBase());
-
-        //add switch state for the first
+        statesDictionary = new Dictionary<T, StateBase>();
     }
 
-    private void Start()
+    public void RegisterState(T enumType, StateBase newState)
     {
-        
+        statesDictionary.Add(enumType, newState);
     }
 
-    private void Update()
+    public void Update()
     {
         if (_currentState != null)
             _currentState.OnStateStay();
     }
 
-    private void StartGame()
-    {
-        SwitchState(States.NONE);
-    }
-
-    public void SwitchState(States state)
+    public void SwitchState(T state)
     {
         if (_currentState != null)
             _currentState.OnStateExit();
 
-        _currentState = gameStates[state];
+        _currentState = statesDictionary[state];
+        _currentStateType = state;
+
         _currentState.OnStateEnter();      
     }
 }
