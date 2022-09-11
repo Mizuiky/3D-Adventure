@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-public class FSMExemple : MonoBehaviour
+public class FSMExemple : MonoBehaviour, IGameComponent
 {
     public enum States
     {
@@ -10,7 +11,7 @@ public class FSMExemple : MonoBehaviour
         STATE_TWO
     }
 
-    public StateMachine<States> stateMachine;
+    public StateMachine<States, FSMExemple> stateMachine;
 
     public void Start()
     {
@@ -20,8 +21,18 @@ public class FSMExemple : MonoBehaviour
 
     private void Init()
     {
-        stateMachine = new StateMachine<States>();
+        stateMachine = new StateMachine<States, FSMExemple>(this);
         stateMachine.Init();
         stateMachine.RegisterState(States.STATE_ONE, new StateBase());
+    }
+
+    public void Activate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Deactivate()
+    {
+        throw new System.NotImplementedException();
     }
 }
