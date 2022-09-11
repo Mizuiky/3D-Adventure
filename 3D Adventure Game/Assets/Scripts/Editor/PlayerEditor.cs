@@ -17,7 +17,7 @@ public class PlayerEditor : Editor
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("State Machine");
-        EditorGUILayout.Space(3);
+        EditorGUILayout.Space(5);
 
         EditorGUILayout.LabelField("Press I Key for IDLE");
         EditorGUILayout.Space(2);
@@ -25,7 +25,7 @@ public class PlayerEditor : Editor
         EditorGUILayout.Space(2);
         EditorGUILayout.LabelField("Press J Key for JUMP");
 
-        EditorGUILayout.Space(3);
+        EditorGUILayout.Space(10);
 
         if (_player.PlayerMachine == null)
             return;

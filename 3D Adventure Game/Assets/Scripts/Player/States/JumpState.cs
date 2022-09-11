@@ -13,9 +13,10 @@ public class JumpState : StateBase
 
         if (_player != null)
         {
+            _player.CanJump = true;
             _player.CanMove = false;
             _player.JumpState();
-        }        
+        }                  
     }
 
     public override void OnStateStay(object o = null)
@@ -25,6 +26,6 @@ public class JumpState : StateBase
 
     public override void OnStateExit(object o = null)
     {
-        _player.CanMove = true;
+        base.OnStateExit(o);
     }
 }

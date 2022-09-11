@@ -16,6 +16,8 @@ public class Player : MonoBehaviour, IGameComponent
     private float _speed;
     [SerializeField]
     private float _jumpHeight;
+    [SerializeField]
+    private float _jumpGravity;
 
     #region Private Fields
 
@@ -40,9 +42,13 @@ public class Player : MonoBehaviour, IGameComponent
 
     private bool _canJump;
 
-    private Transform _position;
+    [SerializeField]
+    private Transform _groundPosition;
+    [SerializeField]
     private LayerMask _groundLayer;
+    [SerializeField]
     private float _sphereRadius;
+    [SerializeField]
     private Color _sphereColor;
 
     #endregion
@@ -87,7 +93,8 @@ public class Player : MonoBehaviour, IGameComponent
 
     public void Activate()
     {
-        _canMove = false;      
+        _canMove = false;
+        _canJump = true;
     }
 
     private void Init()
@@ -129,8 +136,8 @@ public class Player : MonoBehaviour, IGameComponent
         if (_canMove) 
             MoveState();
 
-        if (!_canMove)
-            IdleState();
+        //if (!_canJump && !_canMove)
+        //    IdleState();
 
         //PlayerInput();
         //Move();
@@ -150,6 +157,12 @@ public class Player : MonoBehaviour, IGameComponent
     public void JumpState()
     {
         _rb.velocity = Vector3.up * _jumpHeight;
+        _rb.velocity -= Vector3.up * Time.deltaTime * _jumpGravity;
+
+        if (GroundCheck())
+        {
+
+        }
     }
 
     #region Movement
@@ -191,12 +204,23 @@ public class Player : MonoBehaviour, IGameComponent
             _canJump = true;
             _rb.velocity = (Vector3.up + _movement) * Time.deltaTime * _jumpHeight;
         }
+        else
+        {
+            _canJump = false;
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = _sphereColor;
+        Gizmos.DrawSphere(_groundPosition.position, _sphereRadius);
     }
 
     public bool GroundCheck()
     {
-        return true;
-            //Physics.OverlapSphere(_position.position, _sphereRadius, _groundLayer);
+        Collider [] check = Physics.OverlapSphere(_groundPosition.position, _sphereRadius, _groundLayer.value);
+
+        return check.Length > 0;
     }
 
     #endregion
