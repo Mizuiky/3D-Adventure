@@ -17,7 +17,9 @@ public class Player : MonoBehaviour, IGameComponent
     [SerializeField]
     private float _jumpHeight;
     [SerializeField]
-    private float _jumpGravity;
+    private float _gravity;
+    [SerializeField]
+    private float _turnSpeed;
 
     #region Private Fields
 
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour, IGameComponent
     private float _ZAxis;
 
     private Vector3 _movement;
+    private float _ySpeed;
 
     #endregion
 
@@ -133,15 +136,16 @@ public class Player : MonoBehaviour, IGameComponent
 
     public void Update()
     {
-        if (_canMove) 
-            MoveState();
-
+        //if (_canMove) 
+        //    MoveState();
         //if (!_canJump && !_canMove)
         //    IdleState();
 
-        //PlayerInput();
-        //Move();
+        PlayerInput();
+        Move();
     }
+
+    #region States
 
     private void IdleState()
     {
@@ -157,13 +161,9 @@ public class Player : MonoBehaviour, IGameComponent
     public void JumpState()
     {
         _rb.velocity = Vector3.up * _jumpHeight;
-        _rb.velocity -= Vector3.up * Time.deltaTime * _jumpGravity;
-
-        if (GroundCheck())
-        {
-
-        }
     }
+
+    #endregion
 
     #region Movement
 
@@ -172,42 +172,48 @@ public class Player : MonoBehaviour, IGameComponent
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
-        _movement = new Vector3(_horizontal, 0, _vertical).normalized;
+        _movement = new Vector3(_horizontal, 0, _vertical);
+        _movement.Normalize();
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
             Jump();
     }
 
     private void Move()
     {
-        if(_horizontal != 0 || _vertical != 0)
+        //applying gravity
+        //_ySpeed -= _gravity * Time.deltaTime;
+        //_movement.y = _ySpeed;
+
+        if (_movement != Vector3.zero)
         {
-            _rb.velocity = _movement * Time.deltaTime * _speed;
+            //Applying the new movement vector
+            _rb.velocity = _movement * _speed * Time.deltaTime;
+
+            RotateToSide();
+
             _animation.OnRun();
         }
         else
-        {
             _animation.OnIdle();
-        }
     }
 
-    private void RotateToSide() { }
+    private void RotateToSide() 
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(_movement);
+        targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
 
-    #endregion
+        _rb.MoveRotation(targetRotation);
+    }
 
     #region Jump
 
     public void Jump()
     {
-        if(GroundCheck())
-        {
-            _canJump = true;
-            _rb.velocity = (Vector3.up + _movement) * Time.deltaTime * _jumpHeight;
-        }
-        else
-        {
-            _canJump = false;
-        }
+        //if(IsGrounded())
+        _ySpeed = _jumpHeight;
+
+       _rb.velocity = _rb.velocity + (Vector3.up * _jumpHeight * Time.deltaTime);
     }
 
     public void OnDrawGizmos()
@@ -216,12 +222,14 @@ public class Player : MonoBehaviour, IGameComponent
         Gizmos.DrawSphere(_groundPosition.position, _sphereRadius);
     }
 
-    public bool GroundCheck()
+    public bool IsGrounded()
     {
-        Collider [] check = Physics.OverlapSphere(_groundPosition.position, _sphereRadius, _groundLayer.value);
+        Collider[] check = Physics.OverlapSphere(_groundPosition.position, _sphereRadius, _groundLayer.value);
 
         return check.Length > 0;
     }
+
+    #endregion
 
     #endregion
 
