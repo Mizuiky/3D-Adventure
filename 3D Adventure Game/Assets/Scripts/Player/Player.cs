@@ -200,6 +200,8 @@ public class Player : MonoBehaviour, IGameComponent
 
     private void RotateToSide() 
     {
+        //transform.Rotate(Vector3.up * _horizontal * _turnSpeed * Time.deltaTime);
+
         Quaternion targetRotation = Quaternion.LookRotation(_movement);
         targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
 
