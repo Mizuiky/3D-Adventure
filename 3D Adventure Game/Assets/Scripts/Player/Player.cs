@@ -10,14 +10,33 @@ public enum PlayerStates
 
 public class Player : MonoBehaviour, IGameComponent
 {
-    [Header("Player Movement Fields")]
-
+    [Header("Player Movement")]
     [SerializeField]
     private float _speed;
+
+    [Header("Animation Speed")]
     [SerializeField]
-    private float _jumpHeight;
+    private KeyCode _keyRun;
+    [SerializeField]
+    private float _animationSpeedMultiplier;
+
+    [Header("Jump")]
+    [SerializeField]
+    private float _jumpForce;
     [SerializeField]
     private float _gravity;
+
+    [Header("Check Ground")]
+    [SerializeField]
+    private Transform _groundPosition;
+    [SerializeField]
+    private LayerMask _groundLayer;
+    [SerializeField]
+    private float _sphereRadius;
+    [SerializeField]
+    private Color _sphereColor;
+
+    [Header("Rotation")]
     [SerializeField]
     private float _turnSpeed;
 
@@ -28,31 +47,16 @@ public class Player : MonoBehaviour, IGameComponent
 
     #region Input and Movement
 
+    private Vector3 _movement;
+
     private bool _canMove;
+    private bool _isWalking;
+    private bool _isGrounded;
+
+    private float _verticalVelocity;
 
     private float _horizontal;
     private float _vertical;
-
-    private float _XAxis;
-    private float _ZAxis;
-
-    private Vector3 _movement;
-    private float _ySpeed;
-
-    #endregion
-
-    #region Jump
-
-    private bool _canJump;
-
-    [SerializeField]
-    private Transform _groundPosition;
-    [SerializeField]
-    private LayerMask _groundLayer;
-    [SerializeField]
-    private float _sphereRadius;
-    [SerializeField]
-    private Color _sphereColor;
 
     #endregion
 
@@ -64,12 +68,6 @@ public class Player : MonoBehaviour, IGameComponent
     {
         get => _canMove;
         set => _canMove = value;
-    }
-
-    public bool CanJump
-    {
-        get => _canJump;
-        set => _canJump = value;
     }
 
     public StateMachine<PlayerStates, Player> PlayerMachine
@@ -96,8 +94,8 @@ public class Player : MonoBehaviour, IGameComponent
 
     public void Activate()
     {
+        _isWalking = false;
         _canMove = false;
-        _canJump = true;
     }
 
     private void Init()
@@ -107,6 +105,8 @@ public class Player : MonoBehaviour, IGameComponent
 
         InitStateMachine();
     }
+
+    #region Player State Machine
 
     private void InitStateMachine()
     {
@@ -129,6 +129,8 @@ public class Player : MonoBehaviour, IGameComponent
         _playerMachine.SwitchState(state);
     }
 
+    #endregion
+
     public void Deactivate()
     {
         throw new System.NotImplementedException();
@@ -138,10 +140,35 @@ public class Player : MonoBehaviour, IGameComponent
     {
         //if (_canMove) 
         //    MoveState();
-        //if (!_canJump && !_canMove)
+        //if (!_canMove)
         //    IdleState();
 
         PlayerInput();
+
+        //_isGrounded = GroundCheck();
+        _isGrounded = false;
+
+        if (_isGrounded)
+        {
+            Debug.Log("Grounded true");
+            //_verticalVelocity = 0;
+        }          
+        else
+        {
+            //applying gravity when jumping
+            Debug.Log("Grounded false");
+            //_verticalVelocity -= _gravity * Time.deltaTime;
+            Debug.Log("_verticalVelocity: " + _verticalVelocity);
+        }
+
+        //_movement.y = _verticalVelocity;
+        //_rb.velocity = _movement * Time.deltaTime;
+    }
+
+    public void FixedUpdate()
+    {
+        Jump();
+
         Move();
     }
 
@@ -155,12 +182,12 @@ public class Player : MonoBehaviour, IGameComponent
     private void MoveState()
     {
         _rb.velocity = Vector3.forward * Time.deltaTime * _speed;
-        _animation.OnRun();
+        //_animation.OnRun();
     }
 
     public void JumpState()
     {
-        _rb.velocity = Vector3.up * _jumpHeight;
+        _rb.velocity = Vector3.up * _jumpForce;
     }
 
     #endregion
@@ -172,50 +199,54 @@ public class Player : MonoBehaviour, IGameComponent
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
-        _movement = new Vector3(_horizontal, 0, _vertical);
-        _movement.Normalize();
+        _isWalking = _horizontal != 0 || _vertical != 0;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            Jump();
+        _movement = new Vector3 (_horizontal, 0 , _vertical);
+        _movement.Normalize();
+       
+        if (Input.GetKeyDown(_keyRun))
+            _animation.SetSpeed(_animationSpeedMultiplier); 
     }
 
     private void Move()
     {
-        //applying gravity
-        //_ySpeed -= _gravity * Time.deltaTime;
-        //_movement.y = _ySpeed;
-
-        if (_movement != Vector3.zero)
+        if (_isWalking)
         {
             //Applying the new movement vector
             _rb.velocity = _movement * _speed * Time.deltaTime;
-
-            RotateToSide();
-
-            _animation.OnRun();
         }
-        else
-            _animation.OnIdle();
+
+        RotateToSide(); 
+
+        _animation.OnRun(_isWalking); 
     }
 
     private void RotateToSide() 
     {
         //transform.Rotate(Vector3.up * _horizontal * _turnSpeed * Time.deltaTime);
 
-        Quaternion targetRotation = Quaternion.LookRotation(_movement);
-        targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
+        if(_isWalking)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_movement);
+            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
 
-        _rb.MoveRotation(targetRotation);
+            _rb.MoveRotation(targetRotation);
+        }
     }
 
     #region Jump
 
     public void Jump()
     {
-        //if(IsGrounded())
-        _ySpeed = _jumpHeight;
+        if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded)
+        {
+            Debug.Log("JUMP");
+            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
 
-       _rb.velocity = _rb.velocity + (Vector3.up * _jumpHeight * Time.deltaTime);
+            _isGrounded = true;
+            //_verticalVelocity = _jumpForce;
+            //_rb.velocity = _rb.velocity + (Vector3.up * _jumpForce * Time.deltaTime); 
+        }
     }
 
     public void OnDrawGizmos()
@@ -224,7 +255,7 @@ public class Player : MonoBehaviour, IGameComponent
         Gizmos.DrawSphere(_groundPosition.position, _sphereRadius);
     }
 
-    public bool IsGrounded()
+    public bool GroundCheck()
     {
         Collider[] check = Physics.OverlapSphere(_groundPosition.position, _sphereRadius, _groundLayer.value);
 
@@ -238,18 +269,14 @@ public class Player : MonoBehaviour, IGameComponent
     public void Idle()
     {
         _canMove = false;
-        _canJump = false;
 
         _rb.velocity = Vector3.zero * Time.deltaTime;
-
-        _animation.OnIdle();
+        _animation.OnRun(false);
     }
 
     public void OnDead()
     {
         _canMove = false;
-        _canJump = false;
-
         _animation.OnDead();
     }
 }
