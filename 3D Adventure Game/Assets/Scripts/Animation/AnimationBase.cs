@@ -33,15 +33,14 @@ public class AnimationBase : MonoBehaviour, IAnimation
         _animator = GetComponent<Animator>();
     }
 
-    public virtual void OnIdle()
+    public virtual void SetSpeed(float speed)
     {
-        if(_animator.GetBool(_run))
-            _animator.SetBool(_run, false);
+        _animator.speed *= speed;
     }
 
-    public virtual void OnRun()
+    public virtual void OnRun(bool run)
     {
-        _animator.SetBool(_run, true);
+        _animator.SetBool(_run, run);   
     }
 
     public virtual void OnDead()

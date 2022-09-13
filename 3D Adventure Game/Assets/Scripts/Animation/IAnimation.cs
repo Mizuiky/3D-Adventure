@@ -7,7 +7,7 @@ public interface IAnimation
     public string Run { get; }
     public string Dead { get; }
 
-    public void OnIdle();
-    public void OnRun();
+    public void SetSpeed(float speed);
+    public void OnRun(bool run);
     public void OnDead();
 }
