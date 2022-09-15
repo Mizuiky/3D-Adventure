@@ -5,20 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMove : MonoBehaviour
 {
-    public Vector3 jump;
-    public float jumpForce = 2.0f;
+    public float fallingGravityScale;
+    public float gravity;
+    public float jumpForce;
 
     public bool isGrounded;
+
     Rigidbody rb;
+
+    private float _velocity;
+    private bool _isJumping;
+
+    private Vector3 _move;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
     void OnCollisionStay()
     {
         isGrounded = true;
+        _velocity = 0;
     }
 
     void OnCollisionExit()
@@ -28,11 +36,31 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (rb.velocity.y > 0)
         {
-
-            rb.AddForce(jump * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            //Velocity. y >= 0 means the player is jumping
+            _velocity += gravity * fallingGravityScale * Time.deltaTime;
         }
+
+        _move.y = _velocity;
+        rb.velocity = _move;
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            _isJumping = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isJumping)
+            Jump();
+    }
+
+    private void Jump()
+    {
+        _isJumping = false;
+
+        _velocity = jumpForce;
+
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);  
     }
 }
