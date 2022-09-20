@@ -5,62 +5,120 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMove : MonoBehaviour
 {
-    public float fallingGravityScale;
     public float gravity;
-    public float jumpForce;
+    public float jumpHeight;
 
-    public bool isGrounded;
+    [SerializeField]
+    private float _speed;
+
+    [SerializeField]
+    public bool _isGrounded;
+    [SerializeField]
+    private bool _isWalking;
+
+    [Header("Check Ground")]
+    [SerializeField]
+    private Transform _groundPosition;
+    [SerializeField]
+    private LayerMask _groundLayer;
+    [SerializeField]
+    private float _sphereRadius;
 
     Rigidbody rb;
+    private Vector3 _movement;
 
     private float _velocity;
     private bool _isJumping;
 
-    private Vector3 _move;
+    private float _horizontal;
+    private float _vertical;
 
-    void Start()
+    private Vector3 _move = Vector3.zero;
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    void OnCollisionStay()
+    #region Ground Check
+
+    public void OnDrawGizmos()
     {
-        isGrounded = true;
-        _velocity = 0;
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(_groundPosition.position, _sphereRadius);
     }
 
-    void OnCollisionExit()
+    public bool GroundCheck()
     {
-        isGrounded = false;
+        Collider[] check = Physics.OverlapSphere(_groundPosition.position, _sphereRadius, _groundLayer.value);
+        return check.Length > 0;
     }
+
+    #endregion
 
     void Update()
     {
-        if (rb.velocity.y > 0)
-        {
-            //Velocity. y >= 0 means the player is jumping
-            _velocity += gravity * fallingGravityScale * Time.deltaTime;
-        }
+        //PlayerInput();
 
-        _move.y = _velocity;
-        rb.velocity = _move;
+        _isGrounded = GroundCheck();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             _isJumping = true;
     }
 
     private void FixedUpdate()
     {
+        if (rb.velocity.y < 0)
+            _move.y = 0;
+
+        //gravity beeing applied constantly to the object
+        _move.y += gravity * Time.deltaTime;
+
+        rb.velocity = _move;
+
         if (_isJumping)
             Jump();
+
+        //Move();
+
+       
+    }
+
+    private void PlayerInput()
+    {
+        _horizontal = Input.GetAxisRaw("Horizontal");
+        _vertical = Input.GetAxisRaw("Vertical");
+
+        _isWalking = _horizontal != 0 || _vertical != 0;
+
+        _movement = new Vector3(_horizontal, 0, _vertical);
+
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            _isJumping = true;
+
+    }
+
+    private void Move()
+    {
+        if (_isWalking)
+        {
+            //Applying the new movement vector
+            rb.velocity = _movement * _speed * Time.deltaTime;
+            Debug.Log("velocity " + rb.velocity);
+        }
+
+        //RotateToSide(); 
+
+        //_animation.OnRun(_isWalking);
     }
 
     private void Jump()
     {
         _isJumping = false;
 
-        _velocity = jumpForce;
+        //formula exemple: if jumpheight is 10 so this formula will get the better velocity to achieve this jump height number for the object
+        var jumpforce = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);  
+        _move.y = jumpforce;
     }
 }

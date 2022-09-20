@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        SwitchStateWithInput();
+        //SwitchStateWithInput();
     }
 
     private void SwitchStateWithInput()

@@ -14,7 +14,7 @@ public class JumpState : StateBase
         if (_player != null)
         {
             _player.CanMove = false;
-            _player.JumpState();
+            _player.Jump();
         }                  
     }
 
