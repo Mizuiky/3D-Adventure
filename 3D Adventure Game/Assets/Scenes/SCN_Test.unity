@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 526001156}
   - component: {fileID: 526001157}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: NewPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   _speed: 950
   _isGrounded: 0
   _isWalking: 0
+  _isJumping: 0
   _groundPosition: {fileID: 1791327846}
   _groundLayer:
     serializedVersion: 2

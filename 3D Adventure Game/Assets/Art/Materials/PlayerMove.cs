@@ -5,18 +5,27 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMove : MonoBehaviour
 {
-    public float gravity;
-    public float jumpHeight;
+    [Header("Jump Settings")]
 
+    [SerializeField]
+    private float gravity;
+    [SerializeField]
+    private float jumpHeight;
+
+    [Header("Movement Settings")]
     [SerializeField]
     private float _speed;
 
+    [Header("Booleans to track")]
+
     [SerializeField]
-    public bool _isGrounded;
+    private bool _isGrounded;
     [SerializeField]
     private bool _isWalking;
+    [SerializeField]
+    private bool _isJumping;
 
-    [Header("Check Ground")]
+    [Header("Ground Check")]
     [SerializeField]
     private Transform _groundPosition;
     [SerializeField]
@@ -28,7 +37,6 @@ public class PlayerMove : MonoBehaviour
     private Vector3 _movement;
 
     private float _velocity;
-    private bool _isJumping;
 
     private float _horizontal;
     private float _vertical;
@@ -58,20 +66,17 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        //PlayerInput();
+        PlayerInput();
 
         _isGrounded = GroundCheck();
-
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            _isJumping = true;
     }
 
     private void FixedUpdate()
     {
         if (rb.velocity.y < 0)
             _move.y = 0;
-
-        //gravity beeing applied constantly to the object
+            
+        //Gravity is being applied constantly to the object
         _move.y += gravity * Time.deltaTime;
 
         rb.velocity = _move;
@@ -79,28 +84,25 @@ public class PlayerMove : MonoBehaviour
         if (_isJumping)
             Jump();
 
-        //Move();
-
-       
+        Move();     
     }
 
     private void PlayerInput()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            _isJumping = true;
+
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
         _isWalking = _horizontal != 0 || _vertical != 0;
 
         _movement = new Vector3(_horizontal, 0, _vertical);
-
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            _isJumping = true;
-
     }
 
     private void Move()
     {
-        if (_isWalking)
+        if (_isWalking && _isGrounded)
         {
             //Applying the new movement vector
             rb.velocity = _movement * _speed * Time.deltaTime;
