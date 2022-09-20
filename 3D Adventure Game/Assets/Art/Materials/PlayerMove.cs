@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMove : MonoBehaviour
 {
-    [Header("Rotate Setting")]
+    [Header("Rotation Settings")]
 
     [SerializeField]
     private float _turnSpeed;
@@ -45,6 +45,9 @@ public class PlayerMove : MonoBehaviour
     private float _vertical;
 
     private Vector3 _move = Vector3.zero;
+
+    [SerializeField]
+    private PlayerAnimation _animator;
 
     void Awake()
     {
@@ -86,7 +89,7 @@ public class PlayerMove : MonoBehaviour
 
         Move();
 
-        //RotateToSide();
+        RotateToSide();
 
         if (_isJumping)
             Jump(); 
@@ -113,19 +116,15 @@ public class PlayerMove : MonoBehaviour
             _rb.velocity = _movement * _speed * Time.fixedDeltaTime;
         }
 
-        //_animation.OnRun(_isWalking);
+        _animator.OnRun(_isWalking);
     }
 
     private void RotateToSide()
     {
-        //transform.Rotate(Vector3.up * _horizontal * _turnSpeed * Time.deltaTime);
-
         if (_isWalking)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(_movement);
-            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
-
-            _rb.MoveRotation(targetRotation);
+         {
+            var targetRot = Quaternion.LookRotation(_movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _turnSpeed);
         }
     }
 
@@ -136,9 +135,6 @@ public class PlayerMove : MonoBehaviour
         //formula exemple: if jumpheight is 10 so this formula will get the better velocity to achieve this jump height number for the object
         var jumpforce = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
 
-        Debug.Log("jump vector" + new Vector3(_rb.velocity.x, jumpforce ,_rb.velocity.z));
-        _move = new Vector3(_rb.velocity.x, jumpforce, _rb.velocity.z);
-
-        //_rb.AddForce(new Vector3(_movement.x, jumpforce, _movement.z), ForceMode.VelocityChange);
+        _move = new Vector3(_horizontal, jumpforce, _vertical);
     }
 }
