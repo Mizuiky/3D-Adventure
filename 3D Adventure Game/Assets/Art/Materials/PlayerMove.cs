@@ -5,12 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMove : MonoBehaviour
 {
+    [Header("Rotate Setting")]
+
+    [SerializeField]
+    private float _turnSpeed;
+
     [Header("Jump Settings")]
 
     [SerializeField]
-    private float gravity;
+    private float _gravity;
     [SerializeField]
-    private float jumpHeight;
+    private float _jumpHeight;
 
     [Header("Movement Settings")]
     [SerializeField]
@@ -33,10 +38,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float _sphereRadius;
 
-    Rigidbody rb;
+    Rigidbody _rb;
     private Vector3 _movement;
-
-    private float _velocity;
 
     private float _horizontal;
     private float _vertical;
@@ -45,7 +48,8 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
+        _rb.velocity = Vector3.zero;
     }
 
     #region Ground Check
@@ -73,18 +77,19 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (rb.velocity.y < 0)
+        if (_rb.velocity.y < 0)
             _move.y = 0;
-            
-        //Gravity is being applied constantly to the object
-        _move.y += gravity * Time.deltaTime;
 
-        rb.velocity = _move;
+        _move.y += _gravity * Time.deltaTime;
+        
+        _rb.velocity = _move;
+
+        Move();
+
+        //RotateToSide();
 
         if (_isJumping)
-            Jump();
-
-        Move();     
+            Jump(); 
     }
 
     private void PlayerInput()
@@ -105,13 +110,23 @@ public class PlayerMove : MonoBehaviour
         if (_isWalking && _isGrounded)
         {
             //Applying the new movement vector
-            rb.velocity = _movement * _speed * Time.deltaTime;
-            Debug.Log("velocity " + rb.velocity);
+            _rb.velocity = _movement * _speed * Time.fixedDeltaTime;
         }
 
-        //RotateToSide(); 
-
         //_animation.OnRun(_isWalking);
+    }
+
+    private void RotateToSide()
+    {
+        //transform.Rotate(Vector3.up * _horizontal * _turnSpeed * Time.deltaTime);
+
+        if (_isWalking)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_movement);
+            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
+
+            _rb.MoveRotation(targetRotation);
+        }
     }
 
     private void Jump()
@@ -119,8 +134,11 @@ public class PlayerMove : MonoBehaviour
         _isJumping = false;
 
         //formula exemple: if jumpheight is 10 so this formula will get the better velocity to achieve this jump height number for the object
-        var jumpforce = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        var jumpforce = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
 
-        _move.y = jumpforce;
+        Debug.Log("jump vector" + new Vector3(_rb.velocity.x, jumpforce ,_rb.velocity.z));
+        _move = new Vector3(_rb.velocity.x, jumpforce, _rb.velocity.z);
+
+        //_rb.AddForce(new Vector3(_movement.x, jumpforce, _movement.z), ForceMode.VelocityChange);
     }
 }
