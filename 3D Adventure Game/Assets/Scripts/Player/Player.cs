@@ -10,58 +10,68 @@ public enum PlayerStates
 
 public class Player : MonoBehaviour, IGameComponent
 {
-    [Header("Player Movement")]
+    [Header("Rotation Settings")]
+
+    [SerializeField]
+    private float _turnSpeed;
+
+    [Header("Jump Settings")]
+
+    [SerializeField]
+    private float _gravity;
+    [SerializeField]
+    private float _jumpHeight;
+
+    [Header("Movement Settings")]
     [SerializeField]
     private float _speed;
 
-    [Header("Animation Speed")]
     [SerializeField]
-    private KeyCode _keyRun;
-    [SerializeField]
-    private float _animationSpeedMultiplier;
+    private float _speedRun;
 
-    [Header("Jump")]
-    [SerializeField]
-    private float _jumpHeight;
-    [SerializeField]
-    private float _gravity;
+    [Header("Booleans to track")]
 
-    [Header("Bollean Fields")]
     [SerializeField]
-    //private bool _isGrounded;
-    //[SerializeField]
+    private bool _isGrounded;
+    [SerializeField]
     private bool _isWalking;
+    [SerializeField]
+    private bool _isJumping;
 
-    [Header("Check Ground")]
+    [Header("Ground Check")]
     [SerializeField]
     private Transform _groundPosition;
     [SerializeField]
     private LayerMask _groundLayer;
     [SerializeField]
     private float _sphereRadius;
-    [SerializeField]
-    private Color _sphereColor;
 
-    [Header("Rotation")]
+    [Header("Animation Speed")]
+
     [SerializeField]
-    private float _turnSpeed;
+    private KeyCode _keyRun;
+    [SerializeField]
+    private float _animationSpeedMultiplier;
+
+    [SerializeField]
+    private PlayerAnimation _animator;
 
     #region Private Fields
 
-    private PlayerAnimation _animation;
     private Rigidbody _rb;
+    private PlayerAnimation _animation;
 
     #region Input and Movement
 
     private Vector3 _movement;
+    private Vector3 _move = Vector3.zero;
 
     private bool _canMove;
-    //private bool _isJumping;
-
-    private float _velocity;
 
     private float _horizontal;
     private float _vertical;
+
+    private float _currentSpeed;
 
     #endregion
 
@@ -108,6 +118,8 @@ public class Player : MonoBehaviour, IGameComponent
         _rb = GetComponent<Rigidbody>();
         _animation = GetComponentInChildren<PlayerAnimation>();
 
+        _currentSpeed = _speed;
+
         //InitStateMachine();
     }
 
@@ -143,9 +155,9 @@ public class Player : MonoBehaviour, IGameComponent
 
     public void Update()
     {
-        PlayerInput();
+        _isGrounded = GroundCheck();
 
-        //_isGrounded = GroundCheck();
+        PlayerInput();
     }
 
     public void FixedUpdate()
@@ -153,44 +165,49 @@ public class Player : MonoBehaviour, IGameComponent
         //if (_rb.velocity.y < 0)
         //    _movement.y = 0;
 
-        ////gravity beeing applied constantly to the object
         //_movement.y += _gravity * Time.deltaTime;
+
         //_rb.velocity = _movement;
 
-        //if (_isJumping)
-        //    Jump();
-
         Move();
+
+        RotateToSide();
+
+        if (_isJumping)
+            Jump();
     }
 
     #region Movement
 
     private void PlayerInput()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            _isJumping = true;
+
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
         _isWalking = _horizontal != 0 || _vertical != 0;
 
-        _movement = new Vector3(_horizontal, 0, _vertical);
-        _movement.Normalize();
+        _movement = new Vector3(_horizontal, _move.y, _vertical);
 
-        //if (Input.GetKeyDown(KeyCode.Space) && _isGrounded) ;
-            //_isJumping = true;
-
-        //if (Input.GetKeyDown(_keyRun)) ;
-        //_animation.SetSpeed(_animationSpeedMultiplier); 
+        //if (Input.GetKey(_keyRun) && _isWalking)
+        //    _currentSpeed *= _speedRun;
+        //else
+        //    _currentSpeed = _speed;
     }
 
     private void Move()
-    {
-        if (_isWalking)
+    {  
+        if(_isWalking && _isGrounded)
         {
             //Applying the new movement vector
-            _rb.velocity = _movement * _speed * Time.deltaTime;
-        }
+            Debug.Log("current speed " + _currentSpeed);
+            Debug.Log("movement " + _movement);
 
-        //RotateToSide(); 
+            _rb.MovePosition(transform.position + (_movement * _currentSpeed * Time.deltaTime));
+
+        }
 
         _animation.OnRun(_isWalking);
     }
@@ -199,24 +216,21 @@ public class Player : MonoBehaviour, IGameComponent
 
     public void Jump()
     {
-        //_isJumping = false;
+        _isJumping = false;
 
-        /* formula exemple: if jumpheight is 10 so this formula will get the required velocity to achieve this jump height number for the object, good
-        for the game design do the game balancing*/
-
+        //formula exemple: if jumpheight is 10 so this formula will get the better velocity to achieve this jump height number for the object
         var jumpforce = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
 
         _movement.y = jumpforce;
- 
-        //this formula works with add force as well
-        //_rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);  
+
+        //_move = new Vector3(_movement.x, jumpforce, _movement.z);  
     }
 
     #region Ground Check
 
     public void OnDrawGizmos()
     {
-        Gizmos.color = _sphereColor;
+        Gizmos.color = Color.red;
         Gizmos.DrawSphere(_groundPosition.position, _sphereRadius);
     }
 
@@ -232,14 +246,10 @@ public class Player : MonoBehaviour, IGameComponent
 
     private void RotateToSide()
     {
-        //transform.Rotate(Vector3.up * _horizontal * _turnSpeed * Time.deltaTime);
-
         if (_isWalking)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(_movement);
-            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _turnSpeed * Time.deltaTime);
-
-            _rb.MoveRotation(targetRotation);
+            var targetRot = Quaternion.LookRotation(_movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _turnSpeed);
         }
     }
 
@@ -260,16 +270,6 @@ public class Player : MonoBehaviour, IGameComponent
     }
 
     #endregion
-
-    void OnCollisionStay()
-    {
-        //_isGrounded = true;
-    }
-
-    void OnCollisionExit()
-    {
-        //_isGrounded = false;
-    }
 
     public void Idle()
     {

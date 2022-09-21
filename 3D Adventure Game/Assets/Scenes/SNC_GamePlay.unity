@@ -204,6 +204,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -7257669575993474877, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4121671493948517082, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -464,6 +468,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -8358684845206267307, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2637970196295525522, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
       propertyPath: m_RootOrder
       value: 32
@@ -581,6 +589,10 @@ PrefabInstance:
     - target: {fileID: 8508966238786895894, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8551830176385807558, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
@@ -1220,6 +1232,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (7)
@@ -1242,6 +1258,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -798006525991428508, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 496116524038095586, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock04 (2)
@@ -1554,6 +1574,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -7257669575993474877, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4121671493948517082, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1678,7 +1702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218713229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6587582, y: 10.43, z: -8.272127}
+  m_LocalPosition: {x: 0, y: 0, z: -8.272127}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2258,15 +2282,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315299760}
-  m_LocalRotation: {x: 0.03442997, y: -0.010345126, z: 0.00035641275, w: 0.9993535}
-  m_LocalPosition: {x: 0, y: 11.1, z: -30.32}
+  m_LocalRotation: {x: 0.05408816, y: -0.0022750318, z: 0.00012323298, w: 0.9985336}
+  m_LocalPosition: {x: -0.69999695, y: 14.200003, z: -42.100006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 941396845}
   m_Father: {fileID: 1600956806}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 18.4, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5.51, y: 0.038, z: 0}
 --- !u!114 &315299762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2319,6 +2343,10 @@ PrefabInstance:
     - target: {fileID: 2865259617798041249, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445480045150804057, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8391976400090115252, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_RootOrder
@@ -2682,6 +2710,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -7257669575993474877, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4121671493948517082, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2853,6 +2885,10 @@ PrefabInstance:
     - target: {fileID: 389288316839002207, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
@@ -3304,6 +3340,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -8358684845206267307, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2637970196295525522, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
       propertyPath: m_RootOrder
       value: 52
@@ -3694,6 +3734,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (8)
@@ -3723,6 +3767,10 @@ PrefabInstance:
     - target: {fileID: 2865259617798041249, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445480045150804057, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8391976400090115252, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_RootOrder
@@ -4112,6 +4160,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4445480045150804057, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8391976400090115252, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_RootOrder
       value: 43
@@ -4177,6 +4229,10 @@ PrefabInstance:
     - target: {fileID: 2865259617798041249, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445480045150804057, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8391976400090115252, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_RootOrder
@@ -4462,6 +4518,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -7257669575993474877, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4121671493948517082, guid: 9ae4f6e37df103749a4621f21175d7ad, type: 3}
       propertyPath: m_RootOrder
       value: 36
@@ -4928,6 +4988,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -8358684845206267307, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2637970196295525522, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -5442,7 +5506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 11.1, z: -36.12}
+  m_FollowOffset: {x: -0.69999695, y: 14.200003, z: -42.100006}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -5633,8 +5697,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.03442997, y: -0.010345126, z: 0.00035641275, w: 0.9993535}
-  m_LocalPosition: {x: 0, y: 11.1, z: -30.32}
+  m_LocalRotation: {x: 0.05408816, y: -0.0022750318, z: 0.00012323298, w: 0.9985336}
+  m_LocalPosition: {x: -0.69999695, y: 14.200003, z: -42.100006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6218,6 +6282,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -8358684845206267307, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2637970196295525522, guid: 435b8cb32aa668246ad07146724496fd, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -7412,8 +7480,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369652682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.41, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 379114332}
@@ -7490,6 +7558,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -798006525991428508, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 496116524038095586, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock04
@@ -7600,6 +7672,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (4)
@@ -7666,6 +7742,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (5)
@@ -7695,6 +7775,10 @@ PrefabInstance:
     - target: {fileID: 2865259617798041249, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445480045150804057, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8391976400090115252, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
       propertyPath: m_RootOrder
@@ -8184,6 +8268,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (6)
@@ -8649,6 +8737,10 @@ PrefabInstance:
     - target: {fileID: 8778425298350167733, guid: bcab836cef6dc7c4f81683bcd8f114b3, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790200272445295437, guid: bcab836cef6dc7c4f81683bcd8f114b3, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcab836cef6dc7c4f81683bcd8f114b3, type: 3}
@@ -9131,6 +9223,10 @@ PrefabInstance:
     - target: {fileID: 389288316839002207, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
@@ -9922,6 +10018,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06
@@ -10152,6 +10252,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (1)
@@ -10310,6 +10414,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -798006525991428508, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 496116524038095586, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock04
@@ -10419,6 +10527,10 @@ PrefabInstance:
     - target: {fileID: 389288316839002207, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
@@ -10567,6 +10679,10 @@ PrefabInstance:
     - target: {fileID: 8508966238786895894, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8551830176385807558, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
@@ -10844,6 +10960,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8790200272445295437, guid: bcab836cef6dc7c4f81683bcd8f114b3, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcab836cef6dc7c4f81683bcd8f114b3, type: 3}
 --- !u!4 &1982356717 stripped
@@ -10921,6 +11041,10 @@ PrefabInstance:
     - target: {fileID: 8508966238786895894, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -18.651
+      objectReference: {fileID: 0}
+    - target: {fileID: 8551830176385807558, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5a4b9e77515d54382a4649c0a457c6, type: 3}
@@ -11280,6 +11404,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (9)
@@ -11346,6 +11474,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 572297044086168761, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7336076974915261568, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock06 (11)
@@ -11368,6 +11500,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037790433}
     m_Modifications:
+    - target: {fileID: -798006525991428508, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 496116524038095586, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
       propertyPath: m_Name
       value: PFB_GroundRock04 (1)
@@ -11864,7 +12000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1449173212837510553, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1449173212837510553, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11900,7 +12036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: _speed
-      value: 950
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: _keyRun
@@ -11911,16 +12047,28 @@ PrefabInstance:
       value: -1500
       objectReference: {fileID: 0}
     - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 517410452864980124}
+    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
+      propertyPath: _speedRun
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: _jumpForce
       value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: _turnSpeed
-      value: 650
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: _jumpHeight
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
+      propertyPath: _sphereRadius
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: _gravityMultiplier
@@ -11956,7 +12104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8635363249633005329, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: m_Enabled
@@ -11964,6 +12112,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
+--- !u!114 &517410452864980124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7397891931572128563, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
+  m_PrefabInstance: {fileID: 517410452864980123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b819b6f36b668642a71f852a76a5ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1383248622818666754 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1449173212837510553, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}

@@ -80,6 +80,9 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_isJumping)
+            Jump();
+
         if (_rb.velocity.y < 0)
             _move.y = 0;
 
@@ -90,9 +93,6 @@ public class PlayerMove : MonoBehaviour
         Move();
 
         RotateToSide();
-
-        if (_isJumping)
-            Jump(); 
     }
 
     private void PlayerInput()
@@ -130,11 +130,13 @@ public class PlayerMove : MonoBehaviour
 
     private void Jump()
     {
-        _isJumping = false;
-
         //formula exemple: if jumpheight is 10 so this formula will get the better velocity to achieve this jump height number for the object
         var jumpforce = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
 
-        _move = new Vector3(_horizontal, jumpforce, _vertical);
+        _move = new Vector3(_movement.x, jumpforce, _movement.z);
+
+        _rb.velocity = _move;
+
+        _isJumping = false;
     }
 }
