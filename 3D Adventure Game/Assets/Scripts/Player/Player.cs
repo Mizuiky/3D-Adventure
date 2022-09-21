@@ -23,9 +23,9 @@ public class Player : MonoBehaviour, IGameComponent
     private float _jumpHeight;
 
     [Header("Movement Settings")]
+
     [SerializeField]
     private float _speed;
-
     [SerializeField]
     private float _speedRun;
 
@@ -51,10 +51,7 @@ public class Player : MonoBehaviour, IGameComponent
     [SerializeField]
     private KeyCode _keyRun;
     [SerializeField]
-    private float _animationSpeedMultiplier;
-
-    [SerializeField]
-    private PlayerAnimation _animator;
+    private float _animationSpeed;
 
     #region Private Fields
 
@@ -63,7 +60,6 @@ public class Player : MonoBehaviour, IGameComponent
 
     #region Input and Movement
 
-    private Vector3 _movement;
     private Vector3 _move = Vector3.zero;
 
     private bool _canMove;
@@ -72,6 +68,7 @@ public class Player : MonoBehaviour, IGameComponent
     private float _vertical;
 
     private float _currentSpeed;
+    private Vector3 _movement;
 
     #endregion
 
@@ -162,12 +159,10 @@ public class Player : MonoBehaviour, IGameComponent
 
     public void FixedUpdate()
     {
-        //if (_rb.velocity.y < 0)
-        //    _movement.y = 0;
+        if (_rb.velocity.y < 0)
+            _movement.y = 0;
 
-        //_movement.y += _gravity * Time.deltaTime;
-
-        //_rb.velocity = _movement;
+        _movement.y += _gravity * Time.deltaTime;
 
         Move();
 
@@ -181,34 +176,32 @@ public class Player : MonoBehaviour, IGameComponent
 
     private void PlayerInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            _isJumping = true;
-
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
         _isWalking = _horizontal != 0 || _vertical != 0;
 
-        _movement = new Vector3(_horizontal, _move.y, _vertical);
+        _movement = new Vector3(_horizontal, _movement.y, _vertical);
 
-        //if (Input.GetKey(_keyRun) && _isWalking)
-        //    _currentSpeed *= _speedRun;
-        //else
-        //    _currentSpeed = _speed;
+        if (Input.GetKey(_keyRun))
+        {
+            _currentSpeed = _speedRun;
+            _animation.SetSpeed(_animationSpeed);
+        }
+        else
+        {
+            _currentSpeed = _speed;
+            _animation.SetSpeed(1f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            _isJumping = true;               
     }
 
     private void Move()
-    {  
-        if(_isWalking && _isGrounded)
-        {
-            //Applying the new movement vector
-            Debug.Log("current speed " + _currentSpeed);
-            Debug.Log("movement " + _movement);
-
-            _rb.MovePosition(transform.position + (_movement * _currentSpeed * Time.deltaTime));
-
-        }
-
+    {              
+        //Applying the new movement vector
+        _rb.MovePosition(transform.position + (_movement * _currentSpeed * Time.deltaTime));
         _animation.OnRun(_isWalking);
     }
 
@@ -221,9 +214,13 @@ public class Player : MonoBehaviour, IGameComponent
         //formula exemple: if jumpheight is 10 so this formula will get the better velocity to achieve this jump height number for the object
         var jumpforce = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
 
-        _movement.y = jumpforce;
+        //_movement.y = jumpforce;
+        //_move = new Vector3(_movement.x, jumpforce, _movement.z); 
+        //_rb.velocity = _move;
 
-        //_move = new Vector3(_movement.x, jumpforce, _movement.z);  
+        _rb.AddForce(new Vector3(0, jumpforce, 0), ForceMode.Impulse);
+
+ 
     }
 
     #region Ground Check

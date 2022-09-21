@@ -35,7 +35,7 @@ public class AnimationBase : MonoBehaviour, IAnimation
 
     public virtual void SetSpeed(float speed)
     {
-        _animator.speed *= speed;
+        _animator.speed = speed;
     }
 
     public virtual void OnRun(bool run)

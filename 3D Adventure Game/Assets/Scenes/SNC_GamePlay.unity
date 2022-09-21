@@ -12035,94 +12035,11 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _speed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _keyRun
-      value: 304
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
       propertyPath: _gravity
-      value: -1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _animator
-      value: 
-      objectReference: {fileID: 517410452864980124}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _speedRun
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _jumpForce
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _turnSpeed
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _jumpHeight
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _sphereRadius
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _gravityMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875714292196747986, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: _fallingGravityScale
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_Drag
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216591171288116764, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8635363249633005329, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
---- !u!114 &517410452864980124 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7397891931572128563, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
-  m_PrefabInstance: {fileID: 517410452864980123}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b819b6f36b668642a71f852a76a5ca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1383248622818666754 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1449173212837510553, guid: 18a4c48175e6a0746bfec6b633b13637, type: 3}
