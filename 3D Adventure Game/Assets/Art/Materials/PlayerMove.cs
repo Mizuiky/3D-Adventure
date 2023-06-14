@@ -47,6 +47,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private PlayerAnimation _animator;
 
+    //JUMP https://www.youtube.com/watch?v=-lgcCrnFmeg
 
     private Vector3 _yVelocity;
     private Vector3 _xVelocity;

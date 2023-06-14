@@ -12,18 +12,18 @@ public class GunBase : MonoBehaviour
     private Transform _positionToShoot;
     [SerializeField]
     private float _timeBetweenShoots;
-    [SerializeField]
-    private KeyCode _shootKey;
 
     private Coroutine _currentCoroutine;
 
-    public void Update()
+    public void StartShoot()
     {
-        if(Input.GetKeyDown(_shootKey))
-            _currentCoroutine = StartCoroutine(StartToShoot());
+        EndShoot();
+        _currentCoroutine = StartCoroutine(StartToShoot());
+    }
 
-        else if(Input.GetKeyUp(_shootKey))
-            if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
+    public void EndShoot()
+    {
+        if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
     }
 
     private IEnumerator StartToShoot()
