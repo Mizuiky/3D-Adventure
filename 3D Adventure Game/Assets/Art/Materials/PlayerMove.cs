@@ -13,8 +13,6 @@ public class PlayerMove : MonoBehaviour
     [Header("Jump Settings")]
 
     [SerializeField]
-    private float _gravity;
-    [SerializeField]
     private float _jumpHeight;
 
     [Header("Movement Settings")]
@@ -49,6 +47,19 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private PlayerAnimation _animator;
 
+
+    private Vector3 _yVelocity;
+    private Vector3 _xVelocity;
+    private Vector3 _finalVelocity;
+
+    //jump variables
+
+    private float _maxHight = 5;
+    private float _jumpSpeed;
+    private float _timeToPeak = 0.3f; //time to achieve the highest height
+
+    private float _gravity; 
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -71,58 +82,59 @@ public class PlayerMove : MonoBehaviour
 
     #endregion
 
+    private void Start()
+    {
+        _gravity = (2 * _maxHight) / Mathf.Pow(_timeToPeak, 2);
+
+        _jumpSpeed = _gravity * _timeToPeak;
+    }
+
     void Update()
     {
         PlayerInput();
 
-        _isGrounded = GroundCheck();
-    }
-
-    private void FixedUpdate()
-    {
-        if (_isJumping)
-            Jump();
-
-        if (_rb.velocity.y < 0)
-            _move.y = 0;
-
-        _move.y += _gravity * Time.deltaTime;
-        
-        _rb.velocity = _move;
-
-        Move();
-
         RotateToSide();
+
+        _isGrounded = GroundCheck();
+
+        if (_isGrounded)
+            _isJumping = false;
+        else
+            _isJumping = true;
     }
 
     private void PlayerInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            _isJumping = true;
-
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
-        _isWalking = _horizontal != 0 || _vertical != 0;
+        _isWalking = _horizontal != 0 || _vertical != 0 && _isGrounded && !_isJumping;
 
         _movement = new Vector3(_horizontal, 0, _vertical);
-    }
 
-    private void Move()
-    {
-        if (_isWalking && _isGrounded)
-        {
-            //Applying the new movement vector
-            _rb.velocity = _movement * _speed * Time.fixedDeltaTime;
-        }
+        _xVelocity = _movement * _speed * Time.deltaTime;
+
+        
+        _yVelocity += _gravity * Time.deltaTime * Vector3.down;
+
+
+
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            Jump();
+
+        _finalVelocity = _xVelocity + _yVelocity;
+
+        _rb.velocity = _finalVelocity;
+
 
         _animator.OnRun(_isWalking);
+
     }
 
     private void RotateToSide()
     {
-        if (_isWalking)
-         {
+        if(_isWalking)
+        {
             var targetRot = Quaternion.LookRotation(_movement);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _turnSpeed);
         }
@@ -130,13 +142,6 @@ public class PlayerMove : MonoBehaviour
 
     private void Jump()
     {
-        //formula exemple: if jumpheight is 10 so this formula will get the better velocity to achieve this jump height number for the object
-        var jumpforce = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
-
-        _move = new Vector3(_movement.x, jumpforce, _movement.z);
-
-        _rb.velocity = _move;
-
-        _isJumping = false;
+       _yVelocity = _jumpSpeed * Vector3.up;
     }
 }
