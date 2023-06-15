@@ -12,8 +12,17 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Jump Settings")]
 
-    [SerializeField]
-    private float _jumpHeight;
+    //JUMP https://www.youtube.com/watch?v=-lgcCrnFmeg
+
+    private Vector3 _yVelocity;
+    private Vector3 _xVelocity;
+    private Vector3 _finalVelocity;
+
+    private float _maxHight = 5;
+    private float _jumpSpeed;
+    private float _timeToPeak = 0.3f; //time to achieve the highest height
+
+    private float _gravity;
 
     [Header("Movement Settings")]
     [SerializeField]
@@ -45,21 +54,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 _move = Vector3.zero;
 
     [SerializeField]
-    private PlayerAnimation _animator;
-
-    //JUMP https://www.youtube.com/watch?v=-lgcCrnFmeg
-
-    private Vector3 _yVelocity;
-    private Vector3 _xVelocity;
-    private Vector3 _finalVelocity;
-
-    //jump variables
-
-    private float _maxHight = 5;
-    private float _jumpSpeed;
-    private float _timeToPeak = 0.3f; //time to achieve the highest height
-
-    private float _gravity; 
+    private PlayerAnimation _animator; 
 
     void Awake()
     {
@@ -85,6 +80,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        //isolate g variable on 
         _gravity = (2 * _maxHight) / Mathf.Pow(_timeToPeak, 2);
 
         _jumpSpeed = _gravity * _timeToPeak;
@@ -97,38 +93,37 @@ public class PlayerMove : MonoBehaviour
         RotateToSide();
 
         _isGrounded = GroundCheck();
-
-        if (_isGrounded)
-            _isJumping = false;
-        else
-            _isJumping = true;
     }
 
     private void PlayerInput()
     {
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            Jump();
+
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
-        _isWalking = _horizontal != 0 || _vertical != 0 && _isGrounded && !_isJumping;
+        _isWalking = _horizontal != 0 || _vertical != 0 && _isGrounded;
 
         _movement = new Vector3(_horizontal, 0, _vertical);
 
         _xVelocity = _movement * _speed * Time.deltaTime;
 
-        
-        _yVelocity += _gravity * Time.deltaTime * Vector3.down;
+        Debug.Log("is walking" + _isWalking);
+        _animator.OnRun(_isWalking);
+
+        //_yVelocity += _gravity * Time.deltaTime * Vector3.down;
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            Jump();
+
 
         _finalVelocity = _xVelocity + _yVelocity;
 
         _rb.velocity = _finalVelocity;
 
 
-        _animator.OnRun(_isWalking);
+
 
     }
 
