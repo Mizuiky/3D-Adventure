@@ -226,7 +226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7908f77132cf1fa46bb0dc86b23762bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gunBase: {fileID: 2676998266315973415, guid: bc504ee3964c8674db0461ad0008a4db, type: 3}
+  _gunBase:
+  - {fileID: 8640717846723966921, guid: 1bedc19d64721d64f9f39212d95aaeb6, type: 3}
+  - {fileID: 2676998266315973415, guid: bc504ee3964c8674db0461ad0008a4db, type: 3}
   gunPosition: {fileID: 2108415497}
 --- !u!1 &714750487
 GameObject:

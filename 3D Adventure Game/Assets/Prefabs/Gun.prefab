@@ -114,7 +114,7 @@ MonoBehaviour:
   _projectil: {fileID: 2695266273963626539, guid: 34b156f7848e58c4eb00cbcd2af982a1, type: 3}
   _positionToShoot: {fileID: 8640717847155594003}
   _timeBetweenShoots: 0.2
-  speed: 50
+  speed: 10
 --- !u!1 &8640717847155594002
 GameObject:
   m_ObjectHideFlags: 0
