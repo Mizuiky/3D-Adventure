@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunShootLimit : GunBase
 {
-    public float _currentShoot;
+    private float _currentShoot;
     public float _timeToRecharge = 1f;
     public float _shootLimit = 5;
     public bool _isRecharging = false;
@@ -19,7 +19,7 @@ public class GunShootLimit : GunBase
             {
                 Shoot();
                 _currentShoot++;
-                Debug.Log("current shoot" + _currentShoot);
+
                 CheckRecharge();
                 yield return new WaitForSeconds(_timeBetweenShoots);
             }       
@@ -30,8 +30,6 @@ public class GunShootLimit : GunBase
     {
         if(_currentShoot >= _shootLimit)
         {
-            Debug.Log("current shoot" + _currentShoot);
-            Debug.Log("end shoot");
             EndShoot();
             StartCoroutine(RechargeShoot());
         }      
@@ -39,8 +37,6 @@ public class GunShootLimit : GunBase
 
     private IEnumerator RechargeShoot()
     {
-        Debug.Log("start recharge");
-
         _isRecharging = true;
 
         float time = 0;
@@ -48,7 +44,7 @@ public class GunShootLimit : GunBase
         while(time < _timeToRecharge)
         {
             time += Time.deltaTime;
-            Debug.Log("time:" + time);
+
             yield return new WaitForEndOfFrame();
         }
 

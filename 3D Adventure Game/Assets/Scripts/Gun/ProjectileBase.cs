@@ -7,25 +7,22 @@ public class ProjectileBase : MonoBehaviour
     [Header("Projectile Settings")]
 
     [SerializeField]
-    private float _speed;
+    public float speed = 50f;
     [SerializeField]
-    private float _timeToDestroy;
+    private float _timeToDestroy = 2f;
     [SerializeField]
     private float _damageAmount;
-    
+
     //particle to show
+
+    private void Awake()
+    {
+        Invoke("OnDestroy", _timeToDestroy);
+    }
 
     public void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-    }
-
-    public void Init(Transform shootPosition)
-    {
-        transform.position = shootPosition.position;
-        transform.rotation = shootPosition.rotation;
-
-        Invoke("OnDestroy", _timeToDestroy);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     private void OnDestroy()

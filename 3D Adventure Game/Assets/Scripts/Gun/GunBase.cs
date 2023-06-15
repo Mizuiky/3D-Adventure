@@ -6,14 +6,15 @@ public class GunBase : MonoBehaviour
 {
     [Header("Gun Settings")]
 
-    [SerializeField]
-    private ProjectileBase _projectil;
-    [SerializeField]
-    private Transform _positionToShoot;
+    public ProjectileBase _projectil;
+
+    public Transform _positionToShoot;
 
     private Coroutine _currentCoroutine;
 
     public float _timeBetweenShoots;
+
+    public float speed = 50f;
 
     public void StartShoot()
     {
@@ -35,17 +36,13 @@ public class GunBase : MonoBehaviour
         } 
     }
 
-    protected void Shoot()
+    protected virtual void Shoot()
     {
         //create pool of shoot its better
         var shoot = Instantiate(_projectil, _positionToShoot);
-        shoot.transform.parent = null;
+        shoot.transform.position = _positionToShoot.position;
+        shoot.speed = speed;
 
-        if(shoot != null)
-        {
-            var projectil = shoot.GetComponent<ProjectileBase>();
-            if (projectil != null)
-                projectil.Init(_positionToShoot);
-        }
+        shoot.transform.parent = null;
     }
 }
