@@ -10,10 +10,10 @@ public class GunBase : MonoBehaviour
     private ProjectileBase _projectil;
     [SerializeField]
     private Transform _positionToShoot;
-    [SerializeField]
-    private float _timeBetweenShoots;
 
     private Coroutine _currentCoroutine;
+
+    public float _timeBetweenShoots;
 
     public void StartShoot()
     {
@@ -26,7 +26,7 @@ public class GunBase : MonoBehaviour
         if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
     }
 
-    private IEnumerator StartToShoot()
+    protected virtual IEnumerator StartToShoot()
     {
         while(true)
         {
@@ -35,7 +35,7 @@ public class GunBase : MonoBehaviour
         } 
     }
 
-    private void Shoot()
+    protected void Shoot()
     {
         //create pool of shoot its better
         var shoot = Instantiate(_projectil, _positionToShoot);
