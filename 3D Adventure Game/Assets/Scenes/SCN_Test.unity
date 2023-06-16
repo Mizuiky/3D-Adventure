@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 1388783341}
   - component: {fileID: 1388783340}
   - component: {fileID: 1388783342}
+  - component: {fileID: 1388783343}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -727,7 +728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentLife: 0
-  _startLife: 10
+  _startLife: 50
   enemyAnimation: {fileID: 1388783342}
   startAnimationDuration: 0.2
   startAnimationEase: 27
@@ -770,6 +771,20 @@ MonoBehaviour:
   - animationType: 4
     trigger: Attack
   animator: {fileID: 639726890}
+--- !u!136 &1388783343
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388783339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.1511855
+  m_Height: 5.0897183
+  m_Direction: 1
+  m_Center: {x: 0.14205146, y: 1.7914841, z: 0.035743713}
 --- !u!1 &1564022275
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +942,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911813828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.04}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:

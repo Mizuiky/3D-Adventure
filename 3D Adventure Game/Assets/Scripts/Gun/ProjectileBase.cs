@@ -11,7 +11,7 @@ public class ProjectileBase : MonoBehaviour
     [SerializeField]
     private float _timeToDestroy = 2f;
     [SerializeField]
-    private float _damageAmount;
+    private int _damageAmount;
 
     //particle to show
 
@@ -28,5 +28,20 @@ public class ProjectileBase : MonoBehaviour
     private void OnDestroy()
     {
         Destroy(gameObject);
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("colision");
+
+        var dmg = collision.transform.GetComponent<IDamageble>();
+        
+        if (dmg != null)
+        {
+            Debug.Log("dmg != null");
+            dmg.Damage(_damageAmount);
+            Destroy(gameObject);
+        }
+         
     }
 }

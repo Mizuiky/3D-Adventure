@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace Enemy
 {
-    public class EnemyBase : MonoBehaviour
+    public class EnemyBase : MonoBehaviour, IDamageble
     {
         public int _currentLife;
 
@@ -53,6 +53,12 @@ namespace Enemy
 
             if (_currentLife <= 0)
                 Kill();
+        }
+
+        public void Damage(int value)
+        {
+            Debug.Log("damage");
+            OnDamage(value);
         }
 
         public void Update()
