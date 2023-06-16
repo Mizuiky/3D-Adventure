@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using animation;
+using DG.Tweening;
 
 namespace Enemy
 {
@@ -14,9 +15,15 @@ namespace Enemy
         [SerializeField]
         private EnemyAnimationBase enemyAnimation;
 
+        [Header("Start Animation")]
+        public float startAnimationDuration = .2f;
+        public Ease startAnimationEase = Ease.OutBack;
+        public bool startWithBornAnimation = true;
+
         private void Awake()
         {
             ResetLife();
+            bornAnimation();
         }
 
         protected virtual void ResetLife()
@@ -55,5 +62,14 @@ namespace Enemy
                 OnDamage(5);
             }
         }
+
+        #region Animations
+
+        private void bornAnimation()
+        {
+            //using from It starts the animation from 0 to the original scale
+            transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+        }
+        #endregion
     }
 }

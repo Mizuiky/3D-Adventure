@@ -729,6 +729,9 @@ MonoBehaviour:
   _currentLife: 0
   _startLife: 10
   enemyAnimation: {fileID: 1388783342}
+  startAnimationDuration: 0.2
+  startAnimationEase: 27
+  startWithBornAnimation: 1
 --- !u!4 &1388783341
 Transform:
   m_ObjectHideFlags: 0
