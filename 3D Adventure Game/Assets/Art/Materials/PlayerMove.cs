@@ -42,6 +42,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private int _jumpingFrames;
 
+    private bool _isJumping = false;
+
     [Header("Ground Check")]
     [SerializeField]
     private Transform _groundPosition;
@@ -101,7 +103,14 @@ public class PlayerMove : MonoBehaviour
     private void PlayerInput()
     {
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        {
+            _animator.OnRun(false);
             Jump();
+        }
+            
+        else
+            _jumpingFrames--;
+            
 
         if(Input.GetKey(KeyCode.Q))
         {
@@ -121,9 +130,8 @@ public class PlayerMove : MonoBehaviour
 
         _isWalking = _horizontal != 0 || _vertical != 0 && _isGrounded;
 
-       
         _animator.OnRun(_isWalking);
-        
+
     }
 
     private void FixedUpdate()
@@ -138,6 +146,11 @@ public class PlayerMove : MonoBehaviour
 
         if (!_isGrounded)
             _yVelocity += _gravity * Time.deltaTime * Vector3.down;
+        else
+        {
+            if (_jumpingFrames <= 0)
+                _yVelocity = Vector3.zero;
+        }
     }
 
     private void RotateToSide()
@@ -152,6 +165,6 @@ public class PlayerMove : MonoBehaviour
     private void Jump()
     {
        _yVelocity = _jumpSpeed * Vector3.up;
-    
+       _jumpingFrames = 3;   
     }
 }
