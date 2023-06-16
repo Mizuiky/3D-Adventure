@@ -8,6 +8,8 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private GunBase _currentGun;
 
+    public List<UIGunUpdater> uIGunUpdater;
+
     protected override void Init()
     {
         base.Init();
@@ -26,6 +28,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
         _currentGun = Instantiate(_gunBase[index], gunPosition);
         _currentGun.transform.position = _currentGun.transform.eulerAngles = gunPosition.position;
         _currentGun.transform.rotation = gunPosition.transform.rotation;
+        _currentGun.uIGunUpdater = uIGunUpdater;
 
         _currentGun.gameObject.SetActive(true);
     }

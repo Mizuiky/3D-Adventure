@@ -40,8 +40,6 @@ public class AnimationBase : MonoBehaviour, IAnimation
 
     public virtual void OnRun(bool run)
     {
-        Debug.Log("run" + run);
-        Debug.Log("is running" + _run);
         _animator.SetBool(_run, run);   
     }
 

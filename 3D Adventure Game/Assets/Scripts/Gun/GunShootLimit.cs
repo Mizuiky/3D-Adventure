@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GunShootLimit : GunBase
 {
-    private float _currentShoot;
+    private int _currentShoot;
     public float _timeToRecharge = 1f;
-    public float _shootLimit = 5;
+    public int _shootLimit = 5;
     public bool _isRecharging = false;
 
     protected override IEnumerator StartToShoot()
@@ -19,7 +19,7 @@ public class GunShootLimit : GunBase
             {
                 Shoot();
                 _currentShoot++;
-
+                UpdateUi();
                 CheckRecharge();
                 yield return new WaitForSeconds(_timeBetweenShoots);
             }       
@@ -44,11 +44,17 @@ public class GunShootLimit : GunBase
         while(time < _timeToRecharge)
         {
             time += Time.deltaTime;
-
+            uIGunUpdater.ForEach(i => i.UpdateValue(time / _timeToRecharge));
             yield return new WaitForEndOfFrame();
         }
 
         _currentShoot = 0;
         _isRecharging = false;
+    }
+
+    private void UpdateUi()
+    {
+        Debug.Log("updateUi");
+        uIGunUpdater.ForEach(i => i.UpdateValue(_shootLimit, _currentShoot));
     }
 }

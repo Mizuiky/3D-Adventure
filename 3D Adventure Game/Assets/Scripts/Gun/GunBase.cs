@@ -16,6 +16,8 @@ public class GunBase : MonoBehaviour
 
     public float speed = 50f;
 
+    public List<UIGunUpdater> uIGunUpdater;
+
     public void StartShoot()
     {
         EndShoot();

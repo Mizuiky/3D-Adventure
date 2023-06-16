@@ -18,15 +18,20 @@ public class PlayerMove : MonoBehaviour
     private Vector3 _xVelocity;
     private Vector3 _finalVelocity;
 
-    private float _maxHight = 5;
+    public float _maxHight = 5;
     private float _jumpSpeed;
-    private float _timeToPeak = 0.3f; //time to achieve the highest height
+    public float _timeToPeak = 0.3f; //time to achieve the highest height
 
     private float _gravity;
 
     [Header("Movement Settings")]
     [SerializeField]
-    private float _speed;
+    public float _playerSpeed = 1005;
+
+    public float _animationSpeed = 1.03f;
+    public float _animationNormalSpeed = 1f;
+
+    private bool _isRunning = false;
 
     [Header("Booleans to track")]
 
@@ -35,7 +40,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private bool _isWalking;
     [SerializeField]
-    private bool _isJumping;
+    private int _jumpingFrames;
 
     [Header("Ground Check")]
     [SerializeField]
@@ -50,8 +55,6 @@ public class PlayerMove : MonoBehaviour
 
     private float _horizontal;
     private float _vertical;
-
-    private Vector3 _move = Vector3.zero;
 
     [SerializeField]
     private PlayerAnimation _animator; 
@@ -88,11 +91,11 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        _isGrounded = GroundCheck();
+
         PlayerInput();
 
-        RotateToSide();
-
-        _isGrounded = GroundCheck();
+        RotateToSide();      
     }
 
     private void PlayerInput()
@@ -100,31 +103,41 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             Jump();
 
+        if(Input.GetKey(KeyCode.Q))
+        {
+            _isRunning = true;
+            _playerSpeed = 1300;
+            _animator.SetSpeed(_animationSpeed);
+        }
+        else
+        {
+            _isRunning = false;
+            _playerSpeed = 1005;
+            _animator.SetSpeed(_animationNormalSpeed);
+        }
+
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
         _isWalking = _horizontal != 0 || _vertical != 0 && _isGrounded;
 
+       
+        _animator.OnRun(_isWalking);
+        
+    }
+
+    private void FixedUpdate()
+    {
         _movement = new Vector3(_horizontal, 0, _vertical);
 
-        _xVelocity = _movement * _speed * Time.deltaTime;
-
-        Debug.Log("is walking" + _isWalking);
-        _animator.OnRun(_isWalking);
-
-        //_yVelocity += _gravity * Time.deltaTime * Vector3.down;
-
-
-
-
+        _xVelocity = _movement * _playerSpeed * Time.deltaTime;
 
         _finalVelocity = _xVelocity + _yVelocity;
 
         _rb.velocity = _finalVelocity;
 
-
-
-
+        if (!_isGrounded)
+            _yVelocity += _gravity * Time.deltaTime * Vector3.down;
     }
 
     private void RotateToSide()
@@ -139,5 +152,6 @@ public class PlayerMove : MonoBehaviour
     private void Jump()
     {
        _yVelocity = _jumpSpeed * Vector3.up;
+    
     }
 }
