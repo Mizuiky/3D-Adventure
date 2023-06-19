@@ -73,6 +73,14 @@ namespace Enemy
             OnDamage(value);
         }
 
+        public void Damage(int value, Vector3 dir)
+        {
+            Debug.Log("damage");
+
+            OnDamage(value);
+            transform.DOMove(transform.position - dir, .1f);       
+        }
+
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.T))

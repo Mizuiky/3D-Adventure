@@ -155,10 +155,12 @@ public class PlayerMove : MonoBehaviour
 
     private void RotateToSide()
     {
-        if(_isWalking)
+        if(_movement != Vector3.zero)
         {
-            var targetRot = Quaternion.LookRotation(_movement);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, _turnSpeed);
+            //transform.forward = _movement;
+
+            Quaternion toRotation = Quaternion.LookRotation(_movement, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, _turnSpeed * Time.deltaTime);
         }
     }
 

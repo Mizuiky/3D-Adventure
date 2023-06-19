@@ -39,7 +39,12 @@ public class ProjectileBase : MonoBehaviour
         if (dmg != null)
         {
             Debug.Log("dmg != null");
-            dmg.Damage(_damageAmount);
+
+            var direction = collision.gameObject.transform.position - transform.position;
+            direction = -direction.normalized;
+            direction.y = 0;
+
+            dmg.Damage(_damageAmount, direction);
             Destroy(gameObject);
         }
          
