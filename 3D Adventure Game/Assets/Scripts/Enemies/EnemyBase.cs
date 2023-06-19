@@ -4,13 +4,15 @@ using UnityEngine;
 using animation;
 using DG.Tweening;
 
-namespace Enemy
+namespace enemy
 {
     public class EnemyBase : MonoBehaviour, IDamageble
     {
         public int _currentLife;
 
         public int _startLife;
+
+        public int enemyDamage = 10;
 
         public FlashColor flashColor;
 
@@ -21,6 +23,9 @@ namespace Enemy
         private ParticleSystem particle;
 
 
+        public bool lookAtPlayer;
+        private PlayerMove _player;
+
         [Header("Start Animation")]
         public float startAnimationDuration = .2f;
         public Ease startAnimationEase = Ease.OutBack;
@@ -30,6 +35,24 @@ namespace Enemy
         {
             ResetLife();
             bornAnimation();
+        }
+
+        public virtual void Start()
+        {
+            Init();
+        }
+
+        public virtual void Update()
+        {
+            if (lookAtPlayer)
+            {
+                transform.LookAt(_player.transform.position);
+            }
+        }
+
+        protected virtual void Init()
+        {
+            _player = WorldManager.Instance.Player;
         }
 
         protected virtual void ResetLife()
@@ -81,11 +104,13 @@ namespace Enemy
             transform.DOMove(transform.position - dir, .1f);       
         }
 
-        public void Update()
+        public void OnCollisionEnter(Collision collision)
         {
-            if (Input.GetKeyDown(KeyCode.T))
+            PlayerMove player = collision.gameObject.GetComponent<PlayerMove>();
+
+            if(player != null)
             {
-                OnDamage(5);
+                player.Damage(enemyDamage);
             }
         }
 

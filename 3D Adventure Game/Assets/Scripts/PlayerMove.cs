@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour, IDamageble
 {
     [Header("Rotation Settings")]
 
@@ -59,7 +59,10 @@ public class PlayerMove : MonoBehaviour
     private float _vertical;
 
     [SerializeField]
-    private PlayerAnimation _animator; 
+    private PlayerAnimation _animator;
+
+    [Header("Flash Colors")]
+    public List<FlashColor> flashColor;
 
     void Awake()
     {
@@ -168,5 +171,15 @@ public class PlayerMove : MonoBehaviour
     {
        _yVelocity = _jumpSpeed * Vector3.up;
        _jumpingFrames = 3;   
+    }
+
+    public void Damage(int value)
+    {
+        flashColor.ForEach(i => i.ChangeColor());
+    }
+
+    public void Damage(int value, Vector3 dir)
+    {
+        flashColor.ForEach(i => i.ChangeColor());
     }
 }

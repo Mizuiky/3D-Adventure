@@ -13,6 +13,7 @@ public class ProjectileBase : MonoBehaviour
     [SerializeField]
     private int _damageAmount;
 
+    public List<string> tagsToHit;
     //particle to show
 
     private void Awake()
@@ -32,21 +33,25 @@ public class ProjectileBase : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("colision");
-
-        var dmg = collision.gameObject.GetComponent<IDamageble>();
-        
-        if (dmg != null)
+        foreach(string hit in tagsToHit)
         {
-            Debug.Log("dmg != null");
+            if(hit == collision.gameObject.tag)
+            {
 
-            var direction = collision.gameObject.transform.position - transform.position;
-            direction = -direction.normalized;
-            direction.y = 0;
+                var dmg = collision.gameObject.GetComponent<IDamageble>();
 
-            dmg.Damage(_damageAmount, direction);
-            Destroy(gameObject);
-        }
-         
+                if (dmg != null)
+                {
+                    var direction = collision.gameObject.transform.position - transform.position;
+                    direction = -direction.normalized;
+                    direction.y = 0;
+
+                    dmg.Damage(_damageAmount, direction);
+                    Destroy(gameObject);
+                }
+            }
+
+            break;
+        }      
     }
 }
