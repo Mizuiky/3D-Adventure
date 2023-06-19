@@ -34,7 +34,7 @@ public class ProjectileBase : MonoBehaviour
     {
         Debug.Log("colision");
 
-        var dmg = collision.transform.GetComponent<IDamageble>();
+        var dmg = collision.gameObject.GetComponent<IDamageble>();
         
         if (dmg != null)
         {

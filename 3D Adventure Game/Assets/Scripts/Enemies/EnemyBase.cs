@@ -12,8 +12,14 @@ namespace Enemy
 
         public int _startLife;
 
+        public FlashColor flashColor;
+
         [SerializeField]
         private EnemyAnimationBase enemyAnimation;
+
+        [SerializeField]
+        private ParticleSystem particle;
+
 
         [Header("Start Animation")]
         public float startAnimationDuration = .2f;
@@ -49,6 +55,12 @@ namespace Enemy
 
         protected virtual void OnDamage(int value)
         {
+            if(flashColor != null)
+                flashColor.ChangeColor();
+
+            if(particle != null)
+                particle.Emit(15);
+
             _currentLife -= value;
 
             if (_currentLife <= 0)
