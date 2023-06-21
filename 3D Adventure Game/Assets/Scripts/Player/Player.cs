@@ -1,5 +1,5 @@
 using UnityEngine;
-using StateMachine;
+using Machine;
 
 public enum PlayerStates
 {

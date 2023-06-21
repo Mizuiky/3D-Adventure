@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StateMachine
+namespace Machine
 {
     public class StateMachine<T, U> where T : System.Enum where U : IGameComponent
     {
@@ -43,7 +43,7 @@ namespace StateMachine
                 _currentState.OnStateStay();
         }
 
-        public void SwitchState(T state)
+        public void SwitchState(T state, params object [] obj)
         {
             if (_currentState != null)
                 _currentState.OnStateExit();

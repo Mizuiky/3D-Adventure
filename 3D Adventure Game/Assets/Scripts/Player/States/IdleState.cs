@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StateMachine;
+using Machine;
 
 public class IdleState : StateBase
 {
     private Player _player;
 
-    public override void OnStateEnter(object o = null)
+    public override void OnStateEnter(params object[] obj)
     {
-        _player = (Player)o;
+        _player = (Player)obj[0];
 
         if(_player != null)
             _player.Idle();   
     }
 
-    public override void OnStateStay(object o = null)
+    public override void OnStateStay()
     {
         base.OnStateStay();
     }
 
-    public override void OnStateExit(object o = null)
+    public override void OnStateExit()
     {
         base.OnStateExit();
     }

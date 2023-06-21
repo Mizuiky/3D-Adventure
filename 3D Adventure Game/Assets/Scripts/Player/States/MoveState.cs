@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StateMachine;
+using Machine;
 
 public class MoveState : StateBase
 {
     private Player _player;
 
-    public override void OnStateEnter(object o = null)
+    public override void OnStateEnter(params object[] obj)
     {
-        _player = (Player)o;
+        _player = (Player)obj[0];
 
         if (_player != null)
             _player.CanMove = true;
     }
 
-    public override void OnStateStay(object o = null)
+    public override void OnStateStay()
     {
-        base.OnStateStay(o);
+        base.OnStateStay();
     }
 
-    public override void OnStateExit(object o = null)
+    public override void OnStateExit()
     {
         _player.CanMove = false;
     }

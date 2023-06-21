@@ -6,7 +6,6 @@ public class WorldManager : MonoBehaviour
 {
     [SerializeField]
     private PlayerMove player;
-
     public static WorldManager Instance;
 
     public PlayerMove Player { get { return player;  } }

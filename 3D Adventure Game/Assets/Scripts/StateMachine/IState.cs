@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StateMachine
+namespace Machine
 {
     public interface IState
     {
-        public void OnStateEnter(object o = null);
+        public void OnStateEnter(params object[] obj);
 
-        public void OnStateStay(object o = null);
+        public void OnStateStay();
 
-        public void OnStateExit(object o = null);
+        public void OnStateExit();
     }
 }
 

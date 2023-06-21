@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StateMachine;
+using Machine;
 
 public class JumpState : StateBase
 {
     private Player _player;
 
-    public override void OnStateEnter(object o = null)
+    public override void OnStateEnter(params object[] obj)
     {
-        _player = (Player)o;
+        _player = (Player)obj[0];
 
         if (_player != null)
         {
@@ -18,13 +18,13 @@ public class JumpState : StateBase
         }                  
     }
 
-    public override void OnStateStay(object o = null)
+    public override void OnStateStay()
     {
-        base.OnStateStay(o);
+        base.OnStateStay();
     }
 
-    public override void OnStateExit(object o = null)
+    public override void OnStateExit()
     {
-        base.OnStateExit(o);
+        base.OnStateExit();
     }
 }
