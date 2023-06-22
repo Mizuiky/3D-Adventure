@@ -191,6 +191,6 @@ public class PlayerMove : MonoBehaviour
 
     public void Damage(int value, Vector3 dir)
     {
-        flashColor.ForEach(i => i.ChangeColor());
+        //flashColor.ForEach(i => i.ChangeColor());
     }
 }

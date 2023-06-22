@@ -20,7 +20,7 @@ public class ProjectileBase : MonoBehaviour
 
     private void Awake()
     {
-        if (_collider != null) _collider = GetComponent<SphereCollider>();
+        if (_collider == null) _collider = GetComponent<SphereCollider>();
 
         Invoke("OnDestroy", _timeToDestroy);
     }
@@ -43,7 +43,6 @@ public class ProjectileBase : MonoBehaviour
             {
 
                 var dmg = collision.gameObject.GetComponent<IDamageble>();
-                var health = collision.gameObject.GetComponent<HealthBase>();
 
                 if (dmg != null)
                 {
@@ -51,17 +50,9 @@ public class ProjectileBase : MonoBehaviour
                     direction = -direction.normalized;
                     direction.y = 0;
 
-                    dmg.Damage(_damageAmount, direction);
+                    dmg.Damage(_damageAmount);
 
                     if(_collider != null) _collider.enabled = false;
-                    Destroy(gameObject);
-                }
-
-                else if(health != null)
-                {
-                    health.Damage(_damageAmount);
-
-                    if (_collider != null) _collider.enabled = false;
                     Destroy(gameObject);
                 }
 
