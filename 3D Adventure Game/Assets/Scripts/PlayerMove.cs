@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,6 +67,8 @@ public class PlayerMove : MonoBehaviour
 
     public HealthBase healthBase;
 
+    public Action OnEndGame;
+
     public void OnValidate()
     {
         if (healthBase == null) healthBase = GetComponent<HealthBase>();
@@ -79,6 +82,7 @@ public class PlayerMove : MonoBehaviour
         _rb.velocity = Vector3.zero;
 
         healthBase.OnDamage += Damage;
+        healthBase.OnKill += Kill;
     }
 
     #region Ground Check
@@ -187,6 +191,12 @@ public class PlayerMove : MonoBehaviour
     public void Damage(HealthBase h)
     {
         flashColor.ForEach(i => i.ChangeColor());
+    }
+
+    public void Kill(HealthBase h)
+    {
+        OnEndGame?.Invoke();
+        Destroy(gameObject);
     }
 
     public void Damage(int value, Vector3 dir)

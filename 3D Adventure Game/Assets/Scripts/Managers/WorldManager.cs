@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class WorldManager : MonoBehaviour
     private PlayerMove player;
     public static WorldManager Instance;
 
+    public bool finishGamePlay;
     public PlayerMove Player { get { return player;  } }
 
     public void Awake()
@@ -20,5 +22,14 @@ public class WorldManager : MonoBehaviour
         {
             Destroy(Instance.gameObject);
         }
+
+        finishGamePlay = false;
+
+        player.OnEndGame += FinishGamePlay;
+    }
+
+    public void FinishGamePlay()
+    {
+        finishGamePlay = true;
     }
 }

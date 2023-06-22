@@ -39,14 +39,14 @@ public class HealthBase : MonoBehaviour, IDamageble
 
         _currentLife -= value;
 
-        if (_currentLife <= 0)
-            Kill();
-
         OnDamage?.Invoke(this);
+
+        if (_currentLife <= 0)
+            Kill();    
     }
 
     public void Damage(int value, Vector3 dir)
     {
-        throw new NotImplementedException();
+        
     }
 }

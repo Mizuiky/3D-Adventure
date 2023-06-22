@@ -14,7 +14,8 @@ public class GunBase : MonoBehaviour
 
     public float _timeBetweenShoots;
 
-    public float speed = 50f;
+    [SerializeField]
+    protected float speed;
 
     public List<UIGunUpdater> uIGunUpdater;
 

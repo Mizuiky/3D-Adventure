@@ -111,9 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4061707879f77da428a561007d25b683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 200
   _timeToDestroy: 10
   _damageAmount: 10
+  _collider: {fileID: 0}
   tagsToHit:
   - Player
 --- !u!54 &1569213734384788141

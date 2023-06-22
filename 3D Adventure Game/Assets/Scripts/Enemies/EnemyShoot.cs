@@ -18,7 +18,9 @@ namespace enemy
         public override void Update()
         {
             base.Update();
-            transform.LookAt(WorldManager.Instance.Player.transform.position);
+
+            if(!WorldManager.Instance.finishGamePlay)
+                transform.LookAt(WorldManager.Instance.Player.transform.position);
         }
     }
 }

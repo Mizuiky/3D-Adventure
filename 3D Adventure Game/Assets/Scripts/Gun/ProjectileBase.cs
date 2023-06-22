@@ -6,8 +6,7 @@ public class ProjectileBase : MonoBehaviour
 {
     [Header("Projectile Settings")]
 
-    [SerializeField]
-    public float speed = 50f;
+    public float speed;
     [SerializeField]
     private float _timeToDestroy = 2f;
     [SerializeField]
@@ -28,11 +27,6 @@ public class ProjectileBase : MonoBehaviour
     public void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-
-    private void OnDestroy()
-    {
-        Destroy(gameObject);
     }
     
     private void OnCollisionEnter(Collision collision)
