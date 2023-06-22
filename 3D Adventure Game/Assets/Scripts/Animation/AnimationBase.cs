@@ -45,6 +45,7 @@ public class AnimationBase : MonoBehaviour, IAnimation
 
     public virtual void OnDead()
     {
+        Debug.Log("death animation");
         _animator.SetBool(_dead, true);
     }
 }

@@ -64,14 +64,18 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Flash Colors")]
     public List<FlashColor> flashColor;
+    private CapsuleCollider collider;
 
     public HealthBase healthBase;
 
     public Action OnEndGame;
 
+    private bool _isAlive;
+
     public void OnValidate()
     {
         if (healthBase == null) healthBase = GetComponent<HealthBase>();
+        if (collider == null) collider = GetComponent<CapsuleCollider>();
     }
 
     void Awake()
@@ -107,6 +111,10 @@ public class PlayerMove : MonoBehaviour
         _gravity = (2 * _maxHight) / Mathf.Pow(_timeToPeak, 2);
 
         _jumpSpeed = _gravity * _timeToPeak;
+
+        _isAlive = true;
+
+        collider.enabled = true;
     }
 
     void Update()
@@ -195,8 +203,17 @@ public class PlayerMove : MonoBehaviour
 
     public void Kill(HealthBase h)
     {
-        OnEndGame?.Invoke();
-        Destroy(gameObject);
+        if(_isAlive)
+        {
+            Debug.Log("is alive false");
+            _isAlive = false;
+
+            _animator.OnDead();
+
+            collider.enabled = false;
+
+            OnEndGame?.Invoke();       
+        }     
     }
 
     public void Damage(int value, Vector3 dir)
