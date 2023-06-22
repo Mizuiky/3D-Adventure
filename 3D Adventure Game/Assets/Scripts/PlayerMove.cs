@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMove : MonoBehaviour, IDamageble
+public class PlayerMove : MonoBehaviour
 {
     [Header("Rotation Settings")]
 
@@ -64,10 +64,21 @@ public class PlayerMove : MonoBehaviour, IDamageble
     [Header("Flash Colors")]
     public List<FlashColor> flashColor;
 
+    public HealthBase healthBase;
+
+    public void OnValidate()
+    {
+        if (healthBase == null) healthBase = GetComponent<HealthBase>();
+    }
+
     void Awake()
     {
+        OnValidate();
+
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = Vector3.zero;
+
+        healthBase.OnDamage += Damage;
     }
 
     #region Ground Check
@@ -173,7 +184,7 @@ public class PlayerMove : MonoBehaviour, IDamageble
        _jumpingFrames = 3;   
     }
 
-    public void Damage(int value)
+    public void Damage(HealthBase h)
     {
         flashColor.ForEach(i => i.ChangeColor());
     }

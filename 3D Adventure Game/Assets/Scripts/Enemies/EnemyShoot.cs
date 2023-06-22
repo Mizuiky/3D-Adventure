@@ -14,6 +14,12 @@ namespace enemy
 
             gun.StartShoot();
         }
+
+        public override void Update()
+        {
+            base.Update();
+            transform.LookAt(WorldManager.Instance.Player.transform.position);
+        }
     }
 }
 

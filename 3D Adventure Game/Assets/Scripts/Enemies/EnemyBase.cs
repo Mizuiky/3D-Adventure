@@ -22,10 +22,6 @@ namespace enemy
         [SerializeField]
         private ParticleSystem particle;
 
-
-        public bool lookAtPlayer;
-        private PlayerMove _player;
-
         [Header("Start Animation")]
         public float startAnimationDuration = .2f;
         public Ease startAnimationEase = Ease.OutBack;
@@ -44,15 +40,12 @@ namespace enemy
 
         public virtual void Update()
         {
-            if (lookAtPlayer)
-            {
-                transform.LookAt(_player.transform.position);
-            }
+           
         }
 
         protected virtual void Init()
         {
-            _player = WorldManager.Instance.Player;
+            
         }
 
         protected virtual void ResetLife()
@@ -110,7 +103,7 @@ namespace enemy
 
             if(player != null)
             {
-                player.Damage(enemyDamage);
+                //player.Damage(enemyDamage);
             }
         }
 

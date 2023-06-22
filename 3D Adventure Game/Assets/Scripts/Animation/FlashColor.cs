@@ -33,6 +33,7 @@ public class FlashColor : MonoBehaviour
     [NaughtyAttributes.Button]
     public void ChangeColor()
     {
+        Debug.Log("change color");
         if (mesh != null && !_currentTween.IsActive())
             _currentTween = mesh.material.DOColor(color, "_EmissionColor", animationDuration).SetLoops(2, LoopType.Yoyo);
 
