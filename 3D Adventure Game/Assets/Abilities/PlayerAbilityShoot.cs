@@ -8,7 +8,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private GunBase _currentGun;
 
-    public List<UIGunUpdater> uIGunUpdater;
+    public List<UIUpdater> uIGunUpdater;
 
     protected override void Init()
     {

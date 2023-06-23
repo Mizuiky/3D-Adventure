@@ -6,12 +6,8 @@ using DG.Tweening;
 
 namespace enemy
 {
-    public class EnemyBase : MonoBehaviour, IDamageble
+    public class EnemyBase : MonoBehaviour
     {
-        public int _currentLife;
-
-        public int _startLife;
-
         public int enemyDamage = 10;
 
         public FlashColor flashColor;
@@ -22,6 +18,8 @@ namespace enemy
         [SerializeField]
         private ParticleSystem particle;
 
+        public HealthBase healthBase;
+
         [Header("Start Animation")]
         public float startAnimationDuration = .2f;
         public Ease startAnimationEase = Ease.OutBack;
@@ -29,7 +27,6 @@ namespace enemy
 
         private void Awake()
         {
-            ResetLife();
             bornAnimation();
         }
 
@@ -45,20 +42,11 @@ namespace enemy
 
         protected virtual void Init()
         {
-            
+            healthBase.OnDamage += OnDamage;
+            healthBase.OnKill += OnKill;
         }
 
-        protected virtual void ResetLife()
-        {
-            _currentLife = _startLife;
-        }
-
-        protected virtual void Kill()
-        {
-            OnKill();
-        }
-
-        protected virtual void OnKill()
+        protected virtual void OnKill(HealthBase h)
         {
             Destroy(gameObject, 3f);
             PlayAnimationByType(animationType.DEATH);            
@@ -69,7 +57,7 @@ namespace enemy
             enemyAnimation.PlayAnimationByType(type);
         }
 
-        protected virtual void OnDamage(int value)
+        protected virtual void OnDamage(HealthBase h)
         {
             if(flashColor != null)
                 flashColor.ChangeColor();
@@ -77,24 +65,7 @@ namespace enemy
             if(particle != null)
                 particle.Emit(15);
 
-            _currentLife -= value;
-
-            if (_currentLife <= 0)
-                Kill();
-        }
-
-        public void Damage(int value)
-        {
-            Debug.Log("damage");
-            OnDamage(value);
-        }
-
-        public void Damage(int value, Vector3 dir)
-        {
-            Debug.Log("damage");
-
-            OnDamage(value);
-            transform.DOMove(transform.position - dir, .1f);       
+            transform.DOMove(transform.position - h._currentHitDirection, .1f);
         }
 
         public void OnCollisionEnter(Collision collision)
@@ -103,7 +74,7 @@ namespace enemy
 
             if(player != null)
             {
-                //player.Damage(enemyDamage);
+                player.healthBase.Damage(enemyDamage);
             }
         }
 

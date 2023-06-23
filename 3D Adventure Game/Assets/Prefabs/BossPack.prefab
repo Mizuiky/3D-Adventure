@@ -642,6 +642,8 @@ MonoBehaviour:
   attackAmount: 4
   timeBetweenAttack: 0.4
   healthBase: {fileID: 7753561383853728200}
+  flashColor: {fileID: 3253844041689424146}
+  onDamage: {fileID: 2152349333908529606}
 --- !u!54 &5592651174698499513
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -672,8 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startLife: 50
   _currentLife: 0
-  flashColor: {fileID: 3253844041689424146}
-  damageParticle: {fileID: 2152349333908529606}
+  _currentHitDirection: {x: 0, y: 0, z: 0}
 --- !u!65 &7953526498766460117
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1265,15 +1266,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8618095740077609458, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08
+      value: -0.109
       objectReference: {fileID: 0}
     - target: {fileID: 8618095740077609458, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.07
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8618095740077609458, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: 8618095740077609458, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1307,6 +1308,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e2ac0d4058e23f848969ab7f4892af6b, type: 2}
+    - target: {fileID: 8618095740077609469, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618095740077609469, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618095740077609469, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618095740077609469, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8618095740077609471, guid: 343a50efdce5a0a4b9eb8ed3f42ee9dc, type: 3}
       propertyPath: m_Name
       value: Particle_EnemyDeath

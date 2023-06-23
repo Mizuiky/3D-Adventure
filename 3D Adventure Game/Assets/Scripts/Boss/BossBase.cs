@@ -42,12 +42,17 @@ namespace Boss
 
         public HealthBase healthBase;
 
+        public FlashColor flashColor;
+
+        public ParticleSystem onDamage;
+
         public StateMachine<BossStates, BossBase> stateMachine;
 
         public void Awake()
         {
             Init();
 
+            healthBase.OnDamage += OnDamage;
             healthBase.OnKill += OnBossKill;
         }
 
@@ -192,12 +197,18 @@ namespace Boss
 
         }
 
+        #endregion
+
+        public void OnDamage(HealthBase h)
+        {
+            flashColor.ChangeColor();
+            onDamage.Play();
+        }
+
         private void OnBossKill(HealthBase health)
         {
             stateMachine.SwitchState(BossStates.DEATH);
-        }
-
-        #endregion
+        }      
     }
 }
 

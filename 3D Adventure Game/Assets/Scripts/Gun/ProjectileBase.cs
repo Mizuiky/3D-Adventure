@@ -36,17 +36,17 @@ public class ProjectileBase : MonoBehaviour
             if(hit == collision.gameObject.tag)
             {
 
-                var dmg = collision.gameObject.GetComponent<IDamageble>();
+                var health = collision.gameObject.GetComponent<HealthBase>();
 
-                if (dmg != null)
+                if (health != null)
                 {
                     var direction = collision.gameObject.transform.position - transform.position;
                     direction = -direction.normalized;
                     direction.y = 0;
 
-                    dmg.Damage(_damageAmount);
+                    health.Damage(_damageAmount, direction);
 
-                    if(_collider != null) _collider.enabled = false;
+                    if (_collider != null) _collider.enabled = false;
                     Destroy(gameObject);
                 }
 

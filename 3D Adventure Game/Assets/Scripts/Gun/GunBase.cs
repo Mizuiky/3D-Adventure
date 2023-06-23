@@ -17,7 +17,7 @@ public class GunBase : MonoBehaviour
     [SerializeField]
     protected float speed;
 
-    public List<UIGunUpdater> uIGunUpdater;
+    public List<UIUpdater> uIGunUpdater;
 
     public void StartShoot()
     {

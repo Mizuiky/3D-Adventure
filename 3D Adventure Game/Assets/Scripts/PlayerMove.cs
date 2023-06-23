@@ -32,8 +32,6 @@ public class PlayerMove : MonoBehaviour
     public float _animationSpeed = 1.03f;
     public float _animationNormalSpeed = 1f;
 
-    private bool _isRunning = false;
-
     [Header("Booleans to track")]
 
     [SerializeField]
@@ -66,10 +64,10 @@ public class PlayerMove : MonoBehaviour
     public List<FlashColor> flashColor;
     private CapsuleCollider collider;
 
+    [Header("Life")]
     public HealthBase healthBase;
 
     public Action OnEndGame;
-
     private bool _isAlive;
 
     public void OnValidate()
@@ -119,11 +117,14 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        _isGrounded = GroundCheck();
+        if(_isAlive)
+        {
+            _isGrounded = GroundCheck();
 
-        PlayerInput();
+            PlayerInput();
 
-        RotateToSide();      
+            RotateToSide();
+        }        
     }
 
     private void PlayerInput()
@@ -140,13 +141,11 @@ public class PlayerMove : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Q))
         {
-            _isRunning = true;
             _playerSpeed = 1300;
             _animator.SetSpeed(_animationSpeed);
         }
         else
         {
-            _isRunning = false;
             _playerSpeed = 1005;
             _animator.SetSpeed(_animationNormalSpeed);
         }

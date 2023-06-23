@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 7011442642033231636}
   - component: {fileID: 7215462221112621416}
   - component: {fileID: 3645614221194173363}
+  - component: {fileID: 646394577635543782}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Enemy
@@ -662,16 +663,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc79cfa5f6a68c144a5f301970e378d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentLife: 0
-  _startLife: 20
   enemyDamage: 10
   flashColor: {fileID: 7011442642892244144}
   enemyAnimation: {fileID: 7011442642892244156}
   particle: {fileID: 2702367664533589865}
+  healthBase: {fileID: 646394577635543782}
   startAnimationDuration: 0.2
   startAnimationEase: 27
   startWithBornAnimation: 1
   speed: 5
+--- !u!114 &646394577635543782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011442642033231635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb48df4c6508a442938cdabf5be725a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startLife: 20
+  _currentLife: 0
+  _currentHitDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &7011442642281237191
 GameObject:
   m_ObjectHideFlags: 0
