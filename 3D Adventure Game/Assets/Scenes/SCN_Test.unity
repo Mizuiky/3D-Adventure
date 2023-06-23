@@ -1916,6 +1916,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8867790516756205207, guid: de5751878d7f112409e8460985aa7030, type: 3}
+      propertyPath: _gunBase.Array.data[1]
+      value: 
+      objectReference: {fileID: 2676998266315973415, guid: bc504ee3964c8674db0461ad0008a4db, type: 3}
+    - target: {fileID: 8867790516756205207, guid: de5751878d7f112409e8460985aa7030, type: 3}
       propertyPath: uIGunUpdater.Array.data[0]
       value: 
       objectReference: {fileID: 1975470150}
