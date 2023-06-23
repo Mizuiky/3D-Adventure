@@ -67,7 +67,7 @@ public class PlayerMove : MonoBehaviour
     [Header("Life")]
     public HealthBase healthBase;
 
-    public Action OnEndGame;
+    public Action<bool> OnEndGame;
     public bool _isAlive;
 
     public void OnValidate()
@@ -209,10 +209,27 @@ public class PlayerMove : MonoBehaviour
 
             collider.enabled = false;
 
-            _animator.OnDead();
+            _animator.OnDead(true);
 
-            OnEndGame?.Invoke();       
+            OnEndGame?.Invoke(true);
+
+            Invoke(nameof(Respawn), 3f);
         }     
+    }
+
+    public void Respawn()
+    {    
+        _isAlive = true;
+
+        collider.enabled = true;
+
+        _animator.OnDead(false);
+
+        healthBase.ResetLife();
+
+        transform.position = CheckPointManager.Instance.GetLastCheckPointPosition();
+
+        OnEndGame?.Invoke(false);
     }
 
     public void Damage(int value, Vector3 dir)

@@ -9,5 +9,5 @@ public interface IAnimation
 
     public void SetSpeed(float speed);
     public void OnRun(bool run);
-    public void OnDead();
+    public void OnDead(bool isDead);
 }

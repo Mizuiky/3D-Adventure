@@ -75,17 +75,20 @@ namespace enemy
         {
             PlayerMove player = collision.gameObject.GetComponent<PlayerMove>();
 
-            if (player != null && isAlive)
+            if (player != null && player._isAlive)
             {
                 player.healthBase.Damage(enemyDamage);
             }
         }
 
-        public virtual void OnEndGame()
+        public virtual void OnEndGame(bool endGame)
         {
-            Debug.Log("end game enemy");
-            isAlive = false;
-            StopAllCoroutines();           
+            if(endGame)
+            {
+                Debug.Log("end game enemy");
+                isAlive = false;
+                StopAllCoroutines();
+            }                   
         }
         
         #region Animations

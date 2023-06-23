@@ -9,7 +9,7 @@ public class WorldManager : MonoBehaviour
     private PlayerMove player;
     public static WorldManager Instance;
 
-    public bool finishGamePlay;
+    public bool finishGamePlay = false;
     public PlayerMove Player { get { return player;  } }
 
     public void Awake()
@@ -28,8 +28,11 @@ public class WorldManager : MonoBehaviour
         player.OnEndGame += FinishGamePlay;
     }
 
-    public void FinishGamePlay()
+    public void FinishGamePlay(bool endGame)
     {
-        finishGamePlay = true;
+        if(endGame)
+        {
+            finishGamePlay = true;
+        }       
     }
 }

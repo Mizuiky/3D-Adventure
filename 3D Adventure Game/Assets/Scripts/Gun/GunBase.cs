@@ -53,8 +53,9 @@ public class GunBase : MonoBehaviour
         shoot.transform.parent = null;
     }
 
-    private void OnEndGame()
+    private void OnEndGame(bool endGame)
     {
-        StopAllCoroutines();
+        if(endGame)
+            StopAllCoroutines();
     }
 }

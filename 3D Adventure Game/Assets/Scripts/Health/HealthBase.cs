@@ -32,6 +32,8 @@ public class HealthBase : MonoBehaviour, IDamageble
     public virtual void ResetLife()
     {
         _currentLife = _startLife;
+
+        UpdateUi(_startLife);
     }
 
     public virtual void Kill()
@@ -45,7 +47,9 @@ public class HealthBase : MonoBehaviour, IDamageble
 
         _currentLife -= value;
 
-        UpdateUi();
+        float life = (float)_currentLife / (float)_startLife;
+
+        UpdateUi(life);
 
         OnDamage?.Invoke(this);
 
@@ -61,7 +65,9 @@ public class HealthBase : MonoBehaviour, IDamageble
 
         _currentHitDirection = dir;
 
-        UpdateUi();
+        float life = (float)_currentLife / (float)_startLife;
+
+        UpdateUi(life);
 
         OnDamage?.Invoke(this);
 
@@ -69,12 +75,10 @@ public class HealthBase : MonoBehaviour, IDamageble
             Kill();
     }
 
-    private void UpdateUi()
+    private void UpdateUi(float life)
     {
         if(uiUpdater != null)
         {
-            float life = (float)_currentLife/(float)_startLife;
-
             uiUpdater.ForEach(i => i.UpdateValue(life));
         }       
     }

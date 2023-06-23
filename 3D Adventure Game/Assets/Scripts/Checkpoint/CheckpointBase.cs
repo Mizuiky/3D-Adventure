@@ -6,14 +6,16 @@ using NaughtyAttributes;
 public class CheckpointBase : MonoBehaviour
 {
     public int key;
-    private string checkPointKey = "CheckpointKey";
+
     public MeshRenderer mesh;
 
     private bool isActivated = false;
 
+    public Transform respawPoint;
+
     private void Start()
     {
-        PlayerPrefs.DeleteKey(checkPointKey);
+        PlayerPrefs.DeleteKey("CheckpointKey");
 
         TurnOff();
     }
@@ -21,30 +23,15 @@ public class CheckpointBase : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player" && !isActivated)
-        {
             CheckCheckpoint();
-        }
     }
 
     private void CheckCheckpoint()
     {
-        SaveCheckPoint();
+        CheckPointManager.Instance.SaveCheckpoint(key);
 
         TurnOn();
         isActivated = true;
-    }
-
-    private void SaveCheckPoint()
-    {
-        Debug.Log("player prefs" + PlayerPrefs.GetInt(checkPointKey, 0));
-        Debug.Log("current checkpoint key" + key);
-
-        if (PlayerPrefs.GetInt(checkPointKey, 0) < key)
-        {
-            Debug.Log("save");
-            PlayerPrefs.SetInt(checkPointKey, key);
-        }
-        
     }
 
     private void TurnOn()

@@ -279,6 +279,6 @@ public class Player : MonoBehaviour, IGameComponent
     public void OnDead()
     {
         _canMove = false;
-        _animation.OnDead();
+        _animation.OnDead(true);
     }
 }
