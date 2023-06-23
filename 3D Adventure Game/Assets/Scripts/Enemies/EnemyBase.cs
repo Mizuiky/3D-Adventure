@@ -25,6 +25,8 @@ namespace enemy
         public Ease startAnimationEase = Ease.OutBack;
         public bool startWithBornAnimation = true;
 
+        protected bool isAlive = true;
+
         private void Awake()
         {
             bornAnimation();
@@ -37,19 +39,20 @@ namespace enemy
 
         public virtual void Update()
         {
-           
+
         }
 
         protected virtual void Init()
         {
             healthBase.OnDamage += OnDamage;
             healthBase.OnKill += OnKill;
+            WorldManager.Instance.Player.OnEndGame += OnEndGame;
         }
 
         protected virtual void OnKill(HealthBase h)
         {
             Destroy(gameObject, 3f);
-            PlayAnimationByType(animationType.DEATH);            
+            PlayAnimationByType(animationType.DEATH);
         }
 
         private void PlayAnimationByType(animationType type)
@@ -59,10 +62,10 @@ namespace enemy
 
         protected virtual void OnDamage(HealthBase h)
         {
-            if(flashColor != null)
+            if (flashColor != null)
                 flashColor.ChangeColor();
 
-            if(particle != null)
+            if (particle != null)
                 particle.Emit(15);
 
             transform.DOMove(transform.position - h._currentHitDirection, .1f);
@@ -72,12 +75,19 @@ namespace enemy
         {
             PlayerMove player = collision.gameObject.GetComponent<PlayerMove>();
 
-            if(player != null)
+            if (player != null && isAlive)
             {
                 player.healthBase.Damage(enemyDamage);
             }
         }
 
+        public virtual void OnEndGame()
+        {
+            Debug.Log("end game enemy");
+            isAlive = false;
+            StopAllCoroutines();           
+        }
+        
         #region Animations
 
         private void bornAnimation()

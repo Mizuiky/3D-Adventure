@@ -41,7 +41,7 @@ public class HealthBase : MonoBehaviour, IDamageble
 
     public virtual void Damage(int value)
     {
-        Debug.Log("damage");
+        Debug.Log("damage 1");
 
         _currentLife -= value;
 
@@ -55,7 +55,7 @@ public class HealthBase : MonoBehaviour, IDamageble
 
     public void Damage(int value, Vector3 dir)
     {
-        Debug.Log("damage");
+        Debug.Log("damage 2");
 
         _currentLife -= value;
 
@@ -73,7 +73,9 @@ public class HealthBase : MonoBehaviour, IDamageble
     {
         if(uiUpdater != null)
         {
-            uiUpdater.ForEach(i => i.UpdateValue((float)_currentLife / _startLife));
+            float life = (float)_currentLife/(float)_startLife;
+
+            uiUpdater.ForEach(i => i.UpdateValue(life));
         }       
     }
 }

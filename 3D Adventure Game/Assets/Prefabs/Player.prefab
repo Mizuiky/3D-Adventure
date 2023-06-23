@@ -2230,7 +2230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8867790516394890484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.04, z: 0}
+  m_LocalPosition: {x: 0.03, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2321,6 +2321,7 @@ MonoBehaviour:
   flashColor:
   - {fileID: 5214768276946426715}
   - {fileID: 1475600331570625261}
+  healthBase: {fileID: 3832806034142592133}
 --- !u!136 &8867790516756205204
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2367,8 +2368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startLife: 20
   _currentLife: 0
-  flashColor: {fileID: 0}
-  damageParticle: {fileID: 0}
+  _currentHitDirection: {x: 0, y: 0, z: 0}
+  uiUpdater: []
 --- !u!1 &8867790517465043078
 GameObject:
   m_ObjectHideFlags: 0

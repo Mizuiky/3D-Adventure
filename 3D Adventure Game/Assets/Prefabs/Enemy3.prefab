@@ -939,7 +939,7 @@ Transform:
   - {fileID: 4753779812055140405}
   - {fileID: 3895946368835073860}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4753779812269774919
 Rigidbody:
@@ -1007,6 +1007,7 @@ MonoBehaviour:
   _startLife: 20
   _currentLife: 0
   _currentHitDirection: {x: 0, y: 0, z: 0}
+  uiUpdater: []
 --- !u!1 &4753779812273245814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,7 +1176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8640717846723966921, guid: 1bedc19d64721d64f9f39212d95aaeb6, type: 3}
       propertyPath: speed
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8640717846723966921, guid: 1bedc19d64721d64f9f39212d95aaeb6, type: 3}
       propertyPath: _projectil

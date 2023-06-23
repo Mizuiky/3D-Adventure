@@ -19,8 +19,10 @@ namespace enemy
         {
             base.Update();
 
-            if(!WorldManager.Instance.finishGamePlay)
+            if(isAlive)
+            {
                 transform.LookAt(WorldManager.Instance.Player.transform.position);
+            }              
         }
     }
 }

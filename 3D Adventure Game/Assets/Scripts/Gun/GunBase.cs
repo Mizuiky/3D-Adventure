@@ -14,10 +14,14 @@ public class GunBase : MonoBehaviour
 
     public float _timeBetweenShoots;
 
-    [SerializeField]
-    protected float speed;
+    public float speed;
 
     public List<UIUpdater> uIGunUpdater;
+
+    public void Start()
+    {
+        WorldManager.Instance.Player.OnEndGame += OnEndGame;
+    }
 
     public void StartShoot()
     {
@@ -47,5 +51,10 @@ public class GunBase : MonoBehaviour
         shoot.speed = speed;
 
         shoot.transform.parent = null;
+    }
+
+    private void OnEndGame()
+    {
+        StopAllCoroutines();
     }
 }

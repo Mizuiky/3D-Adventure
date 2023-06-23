@@ -68,7 +68,7 @@ public class PlayerMove : MonoBehaviour
     public HealthBase healthBase;
 
     public Action OnEndGame;
-    private bool _isAlive;
+    public bool _isAlive;
 
     public void OnValidate()
     {
@@ -207,9 +207,9 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("is alive false");
             _isAlive = false;
 
-            _animator.OnDead();
-
             collider.enabled = false;
+
+            _animator.OnDead();
 
             OnEndGame?.Invoke();       
         }     
