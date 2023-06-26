@@ -198,6 +198,7 @@ public class PlayerMove : MonoBehaviour
     public void Damage(HealthBase h)
     {
         flashColor.ForEach(i => i.ChangeColor());
+        EffectManager.Instance.ChangeVinhetColor();
     }
 
     public void Kill(HealthBase h)
