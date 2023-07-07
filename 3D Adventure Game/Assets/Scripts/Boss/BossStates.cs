@@ -47,7 +47,7 @@ namespace Boss
     {
         public override void OnStateEnter(params object[] obj)
         {
-            Debug.Log("WALK STATE");
+            //Debug.Log("WALK STATE");
             base.OnStateEnter(obj);
             boss.WalkThroughPoints(OnArrive);
         }
@@ -70,7 +70,7 @@ namespace Boss
         public override void OnStateEnter(params object[] obj)
         {
             base.OnStateEnter(obj);
-            Debug.Log("IDLE STATE");
+            //Debug.Log("IDLE STATE");
         }
     }
 
@@ -78,7 +78,7 @@ namespace Boss
     {
         public override void OnStateEnter(params object[] obj)
         {
-            Debug.Log("ATTACK STATE");
+            //Debug.Log("ATTACK STATE");
             base.OnStateEnter(obj);
             boss.StartAttack(EndAttack);
         }
@@ -100,7 +100,7 @@ namespace Boss
         public override void OnStateEnter(params object[] obj)
         {
             base.OnStateEnter(obj);
-            Debug.Log("DEATH STATE");
+            //Debug.Log("DEATH STATE");
 
             boss.transform.localScale = Vector3.one * 0.3f;
             boss.StopAllCoroutines();

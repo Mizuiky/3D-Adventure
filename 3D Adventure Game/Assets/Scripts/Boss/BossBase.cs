@@ -162,7 +162,7 @@ namespace Boss
 
             while (attacks < attackAmount)
             {
-                Debug.Log("attack");
+                //Debug.Log("attack");
 
                 attacks++;
 

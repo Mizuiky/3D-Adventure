@@ -208,9 +208,9 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("is alive false");
             _isAlive = false;
 
-            collider.enabled = false;
-
             _animator.OnDead(true);
+
+            ScreenShake.Instance.Shake();
 
             OnEndGame?.Invoke(true);
 
