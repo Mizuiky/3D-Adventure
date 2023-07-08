@@ -28,6 +28,9 @@ public class CheckPointManager : Singleton<CheckPointManager>
     {
         CheckpointBase checkpoint = checkpoints.Find(i => i.key == lastCheckpoint);
 
-        return checkpoint.respawPoint.position;
+        if(checkpoint != null)
+            return checkpoint.respawPoint.position;
+
+        return Vector3.zero;
     }
 }

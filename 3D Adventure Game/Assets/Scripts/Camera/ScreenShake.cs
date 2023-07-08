@@ -7,50 +7,58 @@ public class ScreenShake : Singleton<ScreenShake>
 {
     [Header("ShakeSetup")]
 
-    public float amplitude;
-    public float frequency;
-    public float time;
+    private float _shakeTime;
 
-    private float shakeTime;
+    public CinemachineVirtualCamera [] virtualCam;
 
-    public CinemachineVirtualCamera camera;
+    private CinemachineBasicMultiChannelPerlin [] _multiChannelPerlin;
 
-    private CinemachineBasicMultiChannelPerlin multiChannelPerlin;
+    private Coroutine _currentCoroutine;
+
+    private int _currentChannel;
 
     public void Start()
     {
-        multiChannelPerlin = camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        shakeTime = 0;
-    }
+        _multiChannelPerlin = new CinemachineBasicMultiChannelPerlin[virtualCam.Length];
 
-    public void Shake(float amplitude, float frequency, float time)
-    {
-        multiChannelPerlin.m_AmplitudeGain = amplitude;
-        multiChannelPerlin.m_FrequencyGain = frequency;
-
-        shakeTime = time;
-    }
-
-    public void Shake()
-    {
-        Debug.Log("shake");
-        Shake(amplitude, frequency, time);
-    }
-
-    public void Update()
-    {
-        if(shakeTime > 0)
+        for (int i = 0; i < virtualCam.Length; i++)
         {
-            shakeTime -= Time.deltaTime;
+            _multiChannelPerlin[i] = virtualCam[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
-        else
-        { 
-            if(multiChannelPerlin != null)
-            {
-                multiChannelPerlin.m_AmplitudeGain = 0;
-                multiChannelPerlin.m_FrequencyGain = 0;
-            }     
+    }
+
+    public void Shake(float amplitude, float frequency, float time, int channel)
+    { 
+        Debug.Log("shake 1");
+
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+
+            _multiChannelPerlin[_currentChannel].m_AmplitudeGain = 0;
+            _multiChannelPerlin[_currentChannel].m_FrequencyGain = 0;
         }
+            
+        _currentCoroutine = StartCoroutine(ShakeCamera(amplitude, frequency, time, channel));
+    }
+
+    public IEnumerator ShakeCamera(float amplitude, float frequency, float time, int channel)
+    {
+        Debug.Log("shake 2");
+
+        _currentChannel = channel;
+
+        _multiChannelPerlin[channel].m_AmplitudeGain = amplitude;
+        _multiChannelPerlin[channel].m_FrequencyGain = frequency;
+
+        Debug.Log("shake 3");
+        yield return new WaitForSeconds(time);
+
+        Debug.Log("shake 4");
+
+        _multiChannelPerlin[channel].m_AmplitudeGain = 0;
+        _multiChannelPerlin[channel].m_FrequencyGain = 0;
+
     }
 
 }

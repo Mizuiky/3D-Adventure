@@ -199,6 +199,8 @@ public class PlayerMove : MonoBehaviour
     {
         flashColor.ForEach(i => i.ChangeColor());
         EffectManager.Instance.ChangeVinhetColor();
+
+        ScreenShake.Instance.Shake(1f, 1f, 0.5f, 0);
     }
 
     public void Kill(HealthBase h)
@@ -208,14 +210,24 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("is alive false");
             _isAlive = false;
 
-            _animator.OnDead(true);
-
-            ScreenShake.Instance.Shake();
-
-            OnEndGame?.Invoke(true);
-
-            Invoke(nameof(Respawn), 3f);
+            StartCoroutine(OnPlayerKill());
         }     
+    }
+
+    public IEnumerator OnPlayerKill()
+    {
+     
+        ScreenShake.Instance.Shake(2, 2, 2, 1);
+
+        yield return new WaitForSeconds(.1f);
+
+        _animator.OnDead(true);
+
+        OnEndGame?.Invoke(true);
+
+        yield return new WaitForSeconds(.1f);
+
+        Invoke(nameof(Respawn), 3f);
     }
 
     public void Respawn()
@@ -228,7 +240,12 @@ public class PlayerMove : MonoBehaviour
 
         healthBase.ResetLife();
 
-        transform.position = CheckPointManager.Instance.GetLastCheckPointPosition();
+        var checkpoint = CheckPointManager.Instance.GetLastCheckPointPosition();
+
+        if(checkpoint != Vector3.zero)
+        {
+            transform.position = checkpoint;
+        }        
 
         OnEndGame?.Invoke(false);
     }

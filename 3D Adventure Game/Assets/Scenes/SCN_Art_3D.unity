@@ -2654,9 +2654,8 @@ GameObject:
   m_Component:
   - component: {fileID: 399211938}
   - component: {fileID: 399211939}
-  - component: {fileID: 399211940}
   m_Layer: 0
-  m_Name: CM vcam3
+  m_Name: CM vcam3 Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2669,7 +2668,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399211937}
-  m_LocalRotation: {x: -0.0008065066, y: 0.99643135, z: -0.009583173, w: -0.083858304}
+  m_LocalRotation: {x: -0.00080650684, y: 0.99643135, z: -0.009583174, w: -0.083858304}
   m_LocalPosition: {x: 17.60759, y: -2.7284641, z: 12.192138}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2716,22 +2715,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 997527509}
---- !u!114 &399211940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399211937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1673169d05d30784ca7ce30ac63b4b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitude: 2
-  frequency: 2
-  time: 2
-  camera: {fileID: 399211939}
 --- !u!1001 &400219141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5020,6 +5003,7 @@ GameObject:
   - component: {fileID: 767699585}
   - component: {fileID: 767699584}
   - component: {fileID: 767699583}
+  - component: {fileID: 767699586}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -5103,6 +5087,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &767699586
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767699581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: -132.17532, y: -656.25256, z: -876.61096}
 --- !u!1 &775153930
 GameObject:
   m_ObjectHideFlags: 0
@@ -5114,7 +5115,7 @@ GameObject:
   - component: {fileID: 775153931}
   - component: {fileID: 775153933}
   m_Layer: 0
-  m_Name: CM vcam1
+  m_Name: CM vcam1 Run
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5127,7 +5128,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775153930}
-  m_LocalRotation: {x: 0.09756685, y: 0.023367854, z: -0.002291495, w: 0.99495196}
+  m_LocalRotation: {x: 0.09756686, y: 0.023367876, z: -0.002291498, w: 0.99495196}
   m_LocalPosition: {x: 12.178793, y: 2.251536, z: -16.48396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10912,8 +10913,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
-  m_LocalRotation: {x: 0.1755052, y: 0.045215867, z: -0.008069524, w: 0.9834065}
-  m_LocalPosition: {x: 208.29001, y: 13.3, z: -42.920002}
+  m_LocalRotation: {x: -0.0011580762, y: 0.9926773, z: -0.00954707, w: -0.12041349}
+  m_LocalPosition: {x: 214.39001, y: 5.69, z: -10.670003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13897,6 +13898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1799399131}
+  - component: {fileID: 1799399132}
   m_Layer: 0
   m_Name: Cameras
   m_TagString: Untagged
@@ -13921,6 +13923,21 @@ Transform:
   m_Father: {fileID: 1427190039}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1799399132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799399130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1673169d05d30784ca7ce30ac63b4b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCam:
+  - {fileID: 1908481224}
+  - {fileID: 399211939}
 --- !u!1001 &1809586846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14955,7 +14972,7 @@ GameObject:
   - component: {fileID: 1908481223}
   - component: {fileID: 1908481224}
   m_Layer: 0
-  m_Name: CM vcam2
+  m_Name: CM vcam2 Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14968,7 +14985,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908481222}
-  m_LocalRotation: {x: 0.17568322, y: 0.00905209, z: -0.0016154973, w: 0.98440385}
+  m_LocalRotation: {x: 0.17568322, y: 0.0090521015, z: -0.0016154973, w: 0.98440385}
   m_LocalPosition: {x: 13.892374, y: 4.8815365, z: -20.418745}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
