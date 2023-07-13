@@ -38,6 +38,30 @@ namespace Items
 
             OnChangeUI?.Invoke(item);
         }
+
+        public ItemSetup GetByType(ItemType type)
+        {
+            ItemSetup item = itemSetup.Find(x => x.itemType == type);
+
+            if (item != null)
+            {
+                return item;
+            }
+
+            return null;
+        }
+
+        public void RemoveByType(ItemType type, int amount = 1)
+        {
+            ItemSetup item = itemSetup.Find(x => x.itemType == type);
+
+            if (item != null)
+            {
+                item.so.value -= amount;
+
+                OnChangeUI?.Invoke(item);
+            }
+        }
     }
 
     [System.Serializable]
