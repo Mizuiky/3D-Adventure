@@ -19,6 +19,11 @@ public class HealthBase : MonoBehaviour, IDamageble
     [SerializeField]
     private List<UIUpdater> uiUpdater;
 
+    public int StartLife
+    {
+        get { return _startLife; }
+    }
+
     public void Awake()
     {
         Init();
