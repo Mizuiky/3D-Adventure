@@ -14,9 +14,26 @@ public class ChestBase : MonoBehaviour
 
     public GameObject graphic;
 
+    public KeyCode keyToOpen;
+
+    private bool chestOpened;
+
+    [Space]
+    public ChestItemBase chestItem;
+    public float showItemDelay = 2f;
+
     public void Start()
     {
         HideGraphic();
+        chestOpened = false;
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(keyToOpen) && !chestOpened)
+        {
+            OpenChest();
+        }  
     }
 
     public void OnTriggerEnter(Collider other)
@@ -34,20 +51,31 @@ public class ChestBase : MonoBehaviour
         HideGraphic();
     }
 
+    private void ShowItem()
+    {
+        chestItem.ShowItem();
+    }
+
     public virtual void OpenChest()
     {
+        if (chestOpened) return;
+
         if(chestAnimator != null)
         {
             chestAnimator.SetTrigger(chestTrigger);
         }
+
+        Invoke("ShowItem", showItemDelay);
+
+        chestOpened = true;
     }
 
-    public void HideGraphic()
+    private void HideGraphic()
     {
         graphic.SetActive(false);
     }
 
-    public void ShowGraphic()
+    private void ShowGraphic()
     {
         graphic.SetActive(true);
     }

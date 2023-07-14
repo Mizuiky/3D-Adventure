@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1590565551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1590565553}
+  - component: {fileID: 1590565552}
+  m_Layer: 0
+  m_Name: ChestItemCoin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1590565553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590565551}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: -0.19, y: 2.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 192860403247030459}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590565552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590565551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a90be7de7f49c438107558cdb39981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 2886033483290446002, guid: 5fd76a19231b2a74a83587734137d449, type: 3}
+  qtd: 1
 --- !u!1 &713535970505882113
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,12 +77,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1590565553}
   - {fileID: 6088345853467998912}
   - {fileID: 2504100619039525848}
   - {fileID: 4166777190306732377}
   - {fileID: 8512533327764364300}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &636416062
 SphereCollider:
@@ -68,6 +115,9 @@ MonoBehaviour:
   chestTrigger: Open
   arrowTrigger: Notify
   graphic: {fileID: 3893998540301743889}
+  keyToOpen: 122
+  chestItem: {fileID: 1590565552}
+  showItemDelay: 1
 --- !u!95 &636416063
 Animator:
   serializedVersion: 4
