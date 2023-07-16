@@ -166,7 +166,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         private @Inputs m_Wrapper;
         public GamePlayActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_GamePlay_Shoot;
-        public InputAction Gun1 => m_Wrapper.m_GamePlay_Gun1;
+        public InputAction @Gun1 => m_Wrapper.m_GamePlay_Gun1;
         public InputAction @Gun2 => m_Wrapper.m_GamePlay_Gun2;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
@@ -180,9 +180,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShoot;
-                Gun1.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun1;
-                Gun1.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun1;
-                Gun1.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun1;
+                @Gun1.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun1;
+                @Gun1.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun1;
+                @Gun1.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun1;
                 @Gun2.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun2;
                 @Gun2.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun2;
                 @Gun2.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGun2;
@@ -193,9 +193,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                Gun1.started += instance.OnGun1;
-                Gun1.performed += instance.OnGun1;
-                Gun1.canceled += instance.OnGun1;
+                @Gun1.started += instance.OnGun1;
+                @Gun1.performed += instance.OnGun1;
+                @Gun1.canceled += instance.OnGun1;
                 @Gun2.started += instance.OnGun2;
                 @Gun2.performed += instance.OnGun2;
                 @Gun2.canceled += instance.OnGun2;
