@@ -2,15 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using cloth;
 
 public class WorldManager : MonoBehaviour
 {
     [SerializeField]
     private PlayerMove player;
+    private ClothManager clothManager;
+
     public static WorldManager Instance;
+
 
     public bool finishGamePlay = false;
     public PlayerMove Player { get { return player;  } }
+    public ClothManager ClothManager { get { return clothManager; } }
 
     public void Awake()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Magnetic : MonoBehaviour
 {
-    private float distance = 4f;
+    private float distance = 1f;
     private float magneticSpeed = 2f;
 
     public void Update()

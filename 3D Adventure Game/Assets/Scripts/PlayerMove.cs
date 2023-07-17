@@ -254,4 +254,20 @@ public class PlayerMove : MonoBehaviour
     {
         //flashColor.ForEach(i => i.ChangeColor());
     }
+
+    public void ChangeSpeed(float localSpeed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(localSpeed, duration));
+    }
+
+    public IEnumerator ChangeSpeedCoroutine(float localSpeed, float duration)
+    {
+        float defaultSpeed = _playerSpeed;
+
+        _playerSpeed = localSpeed;
+
+        yield return new WaitForSeconds(duration);
+
+        _playerSpeed = defaultSpeed;
+    }
 }
