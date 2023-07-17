@@ -10,7 +10,6 @@ public class ChestItemCoin : ChestItemBase
 
     public int qtd;
 
-    public float angle;
     public float force;
     public float gravity;
 
