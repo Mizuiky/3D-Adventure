@@ -1927,7 +1927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25926090101f07948a467afe58301919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 8446318939920144084}
+  mesh: {fileID: 1475600331570625258}
   texture: {fileID: 2800000, guid: a9450a287c3405e4d84072a61a19faee, type: 3}
   shaderIdName: _EmissionMap
 --- !u!1 &7825586097522790939
@@ -2447,6 +2447,7 @@ MonoBehaviour:
   - {fileID: 1475600331570625261}
   healthBase: {fileID: 3832806034142592133}
   _isAlive: 0
+  clothChanger: {fileID: 6067911059761957538}
 --- !u!136 &8867790516756205204
 CapsuleCollider:
   m_ObjectHideFlags: 0

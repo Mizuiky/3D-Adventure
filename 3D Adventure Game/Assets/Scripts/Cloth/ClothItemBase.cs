@@ -7,6 +7,7 @@ namespace cloth
     public class ClothItemBase : MonoBehaviour
     {
         public ClothType type;
+        public float duration;
 
         public string tagToCompare = "Player";
 
@@ -21,14 +22,15 @@ namespace cloth
         public virtual void Collect()
         {
             HideItem();
+
+            ClothSetup setup = WorldManager.Instance.ClothManager.GetClothByType(type);
+            WorldManager.Instance.Player.ChangeCloth(setup, duration);
         }
 
         private void HideItem()
         {
             gameObject.SetActive(false);
         }
-
-
     }
 }
 

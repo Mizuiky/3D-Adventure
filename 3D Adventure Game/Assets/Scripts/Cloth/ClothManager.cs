@@ -13,17 +13,17 @@ namespace cloth
     {
         public List<ClothSetup> clothSetup = new List<ClothSetup>();
 
-        public void GetClothByType(ClothType clothType)
+        public ClothSetup GetClothByType(ClothType clothType)
         {
-            clothSetup.Find(x => x.type == clothType);
-        }
+            return clothSetup.Find(x => x.type == clothType);
+        }      
+    }
 
-        [System.Serializable]
-        public class ClothSetup
-        {
-            public ClothType type;
-            public Texture texture;
-        }
+    [System.Serializable]
+    public class ClothSetup
+    {
+        public ClothType type;
+        public Texture texture;
     }
 }
 

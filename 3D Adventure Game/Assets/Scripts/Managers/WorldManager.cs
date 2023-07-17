@@ -8,6 +8,8 @@ public class WorldManager : MonoBehaviour
 {
     [SerializeField]
     private PlayerMove player;
+
+    [SerializeField]
     private ClothManager clothManager;
 
     public static WorldManager Instance;

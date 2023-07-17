@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using cloth;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMove : MonoBehaviour
@@ -43,6 +44,8 @@ public class PlayerMove : MonoBehaviour
 
     private bool _isJumping = false;
 
+    private bool _clothSpeedChange = false;
+
     [Header("Ground Check")]
     [SerializeField]
     private Transform _groundPosition;
@@ -69,6 +72,10 @@ public class PlayerMove : MonoBehaviour
 
     public Action<bool> OnEndGame;
     public bool _isAlive;
+
+    [Space]
+    [SerializeField]
+    private ClothChanger clothChanger;
 
     public void OnValidate()
     {
@@ -146,8 +153,11 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            _playerSpeed = 1005;
-            _animator.SetSpeed(_animationNormalSpeed);
+            if(!_clothSpeedChange)
+            {
+                _playerSpeed = 1005;
+                _animator.SetSpeed(_animationNormalSpeed);
+            }         
         }
 
         _horizontal = Input.GetAxisRaw("Horizontal");
@@ -262,12 +272,26 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator ChangeSpeedCoroutine(float localSpeed, float duration)
     {
-        float defaultSpeed = _playerSpeed;
-
         _playerSpeed = localSpeed;
+
+        _clothSpeedChange = true;
 
         yield return new WaitForSeconds(duration);
 
-        _playerSpeed = defaultSpeed;
+        _clothSpeedChange = false;
+    }
+
+    public void ChangeCloth(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeClothCoroutine(setup, duration));
+    }
+
+    public IEnumerator ChangeClothCoroutine(ClothSetup setup, float duration)
+    {
+        clothChanger.ChangeCloth(setup);
+
+        yield return new WaitForSeconds(duration);
+
+        clothChanger.ResetCloth();
     }
 }

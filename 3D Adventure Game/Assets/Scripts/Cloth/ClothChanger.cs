@@ -9,14 +9,29 @@ namespace cloth
     {
         public SkinnedMeshRenderer mesh;
         public Texture texture;
+        private Texture defaultTexture;
 
         public string shaderIdName = "_EmissionMap";
 
+        public void Start()
+        {
+            defaultTexture = mesh.materials[0].GetTexture(shaderIdName);
+        }
 
         [NaughtyAttributes.Button]
         public void ChangeCloth()
         {
             mesh.materials[0].SetTexture(shaderIdName, texture);
+        }
+
+        public void ChangeCloth(ClothSetup setup)
+        {
+            mesh.materials[0].SetTexture(shaderIdName, setup.texture);
+        }
+
+        public void ResetCloth()
+        {
+            mesh.materials[0].SetTexture(shaderIdName, defaultTexture);
         }
     }
 }
