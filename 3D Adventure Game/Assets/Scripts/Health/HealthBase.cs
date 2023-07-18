@@ -8,7 +8,7 @@ public class HealthBase : MonoBehaviour, IDamageble
     [SerializeField]
     private int _startLife;
 
-    public int _currentLife;
+    public float _currentLife;
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
@@ -18,6 +18,8 @@ public class HealthBase : MonoBehaviour, IDamageble
 
     [SerializeField]
     private List<UIUpdater> uiUpdater;
+
+    private float damageMultiplier = 1f;
 
     public int StartLife
     {
@@ -46,11 +48,11 @@ public class HealthBase : MonoBehaviour, IDamageble
         OnKill?.Invoke(this);
     }
 
-    public virtual void Damage(int value)
+    public virtual void Damage(float value)
     {
         Debug.Log("damage 1");
 
-        _currentLife -= value;
+        _currentLife -= value * damageMultiplier;
 
         float life = (float)_currentLife / (float)_startLife;
 
@@ -62,11 +64,11 @@ public class HealthBase : MonoBehaviour, IDamageble
             Kill();    
     }
 
-    public void Damage(int value, Vector3 dir)
+    public void Damage(float value, Vector3 dir)
     {
         Debug.Log("damage 2");
 
-        _currentLife -= value;
+        _currentLife -= value * damageMultiplier;
 
         _currentHitDirection = dir;
 
@@ -86,5 +88,19 @@ public class HealthBase : MonoBehaviour, IDamageble
         {
             uiUpdater.ForEach(i => i.UpdateValue(life));
         }       
+    }
+
+    public void ReduceDamage(float damageMultiplier, float duration)
+    {
+        StartCoroutine(ReduceDamageCoroutine(damageMultiplier, duration));
+    }
+
+    public IEnumerator ReduceDamageCoroutine(float damageMultiplier, float duration)
+    {
+        this.damageMultiplier = damageMultiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        this.damageMultiplier = 1;
     }
 }

@@ -6,7 +6,8 @@ namespace cloth
 {
     public enum ClothType
     {
-        SPEED
+        SPEED,
+        STRONG
     }
 
     public class ClothManager : MonoBehaviour
