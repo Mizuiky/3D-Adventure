@@ -6,6 +6,7 @@ namespace cloth
 {
     public enum ClothType
     {
+        BASE,
         SPEED,
         STRONG
     }
