@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5119162402760853459}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5119162402275612666
 MonoBehaviour:
@@ -47,10 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c93c52b930dee40b2036755ae28b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentLife: 0
-  _startLife: 50
+  enemyDamage: 10
   flashColor: {fileID: 5119162403561014331}
   enemyAnimation: {fileID: 5119162402275612664}
+  particle: {fileID: 0}
+  healthBase: {fileID: 0}
   startAnimationDuration: 0.2
   startAnimationEase: 27
   startWithBornAnimation: 1
@@ -133,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 6983442274928476050, guid: 86dc2d7519f0fa047a4a9adbc81a8da7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 0a5e050cb4f28334f82f0b265c8c1c20, type: 2}
     - target: {fileID: 7443898874300591051, guid: 86dc2d7519f0fa047a4a9adbc81a8da7, type: 3}
       propertyPath: m_Controller
       value: 
@@ -234,5 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 2873508401479203756}
+  skinnedMesh: {fileID: 0}
   color: {r: 0.9339623, g: 0.118948035, b: 0.12745395, a: 1}
   animationDuration: 0.1
+  _property: _EmissionColor

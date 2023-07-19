@@ -10,6 +10,8 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     public List<UIUpdater> uIGunUpdater;
 
+    public FlashColor flashColor;
+
     protected override void Init()
     {
         base.Init();
@@ -55,6 +57,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private void OnStartShoot()
     {
+        flashColor?.ChangeColor();
         _currentGun.StartShoot();
     }
 

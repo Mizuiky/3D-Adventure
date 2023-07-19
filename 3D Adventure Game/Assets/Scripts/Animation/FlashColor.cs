@@ -15,6 +15,8 @@ public class FlashColor : MonoBehaviour
     private Color initialColor;
     private Tween _currentTween;
 
+    public string _property = "_EmissionColor";
+
     private void OnValidate()
     {
         if(skinnedMesh == null)
@@ -27,7 +29,7 @@ public class FlashColor : MonoBehaviour
     public void Start()
     {
         if (mesh != null)
-            initialColor = mesh.material.GetColor("_EmissionColor");
+            initialColor = mesh.material.GetColor(_property);
     }
 
     [NaughtyAttributes.Button]
@@ -35,9 +37,9 @@ public class FlashColor : MonoBehaviour
     {
         Debug.Log("change color");
         if (mesh != null && !_currentTween.IsActive())
-            _currentTween = mesh.material.DOColor(color, "_EmissionColor", animationDuration).SetLoops(2, LoopType.Yoyo);
+            _currentTween = mesh.material.DOColor(color, _property, animationDuration).SetLoops(2, LoopType.Yoyo);
 
         if (skinnedMesh != null && !_currentTween.IsActive())
-            _currentTween = skinnedMesh.material.DOColor(color, "_EmissionColor", animationDuration).SetLoops(2, LoopType.Yoyo);
+            _currentTween = skinnedMesh.material.DOColor(color, _property, animationDuration).SetLoops(2, LoopType.Yoyo);
     }
 }
