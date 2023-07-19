@@ -22,6 +22,8 @@ public class ChestBase : MonoBehaviour
     public ChestItemBase chestItem;
     public float showItemDelay = 2f;
 
+    public ParticleSystem particle;
+
     public void Start()
     {
         HideGraphic();
@@ -54,6 +56,7 @@ public class ChestBase : MonoBehaviour
     private void ShowItem()
     {
         chestItem.ShowItem();
+        particle?.Play();
     }
 
     public virtual void OpenChest()
