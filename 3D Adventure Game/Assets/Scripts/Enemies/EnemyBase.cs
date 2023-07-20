@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using animation;
 using DG.Tweening;
+using UnityEngine.Events;
 
 namespace enemy
 {
@@ -26,6 +27,8 @@ namespace enemy
         public bool startWithBornAnimation = true;
 
         protected bool isAlive = true;
+
+        public UnityEvent OnEnemyKilled;
 
         private void Awake()
         {
@@ -53,6 +56,7 @@ namespace enemy
         {
             Destroy(gameObject, 3f);
             PlayAnimationByType(animationType.DEATH);
+            OnEnemyKilled?.Invoke();
         }
 
         private void PlayAnimationByType(animationType type)

@@ -19,6 +19,7 @@ public class UIUpdater : MonoBehaviour
         if (image == null)
             image = GetComponent<Image>();
     }
+
     public void UpdateValue(float max, float current)
     {
         if (_currentTween != null)
