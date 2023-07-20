@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using System.IO;
+using Items;
 
 public class SaveManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SaveManager : MonoBehaviour
         _saveSetup = new SaveSetup();
         _saveSetup.lastLevel = 1;
         _saveSetup.playerName = "Priscila";
+        DontDestroyOnLoad(gameObject);
     }
 
     [NaughtyAttributes.Button]
@@ -52,12 +54,21 @@ public class SaveManager : MonoBehaviour
     public void SaveLevel(int level)
     {
         _saveSetup.lastLevel = level;
-        Save();
+        SaveItems();
+        Save();     
     } 
+
+    public void SaveItems()
+    {
+        _saveSetup.coins = ItemManager.Instance.GetByType(ItemType.Coin).so.value;
+        _saveSetup.health = ItemManager.Instance.GetByType(ItemType.Life_Pack).so.value;
+    }
 }
 
 public class SaveSetup
 {
     public int lastLevel;
     public string playerName;
+    public int coins;
+    public float health;
 }
