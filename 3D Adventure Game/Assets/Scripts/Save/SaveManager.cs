@@ -6,16 +6,19 @@ using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
-    
+    private SaveSetup _saveSetup;
+
+    public void Awake()
+    {
+        _saveSetup = new SaveSetup();
+        _saveSetup.lastLevel = 1;
+        _saveSetup.playerName = "Priscila";
+    }
+
     [NaughtyAttributes.Button]
     public void Save()
     {
-        SaveSetup save = new SaveSetup();
-
-        save.lastLevel = 1;
-        save.playerName = "Priscila";
-
-        string jsonSetup = JsonUtility.ToJson(save, true);
+        string jsonSetup = JsonUtility.ToJson(_saveSetup, true);
         Debug.Log(jsonSetup);
 
         SaveFile(jsonSetup);
@@ -26,16 +29,24 @@ public class SaveManager : MonoBehaviour
         string path = Application.dataPath + "/save.txt";
         string fileLoaded = "";
 
-        if (File.Exists(path))
-        {
-            Debug.Log("File Exist");
-            fileLoaded = File.ReadAllText(path);
-            Debug.Log(fileLoaded);
-        }
-        else
-        {
+        //if (File.Exists(path))
+        //{
+        //    Debug.Log("File Exist");
+        //    fileLoaded = File.ReadAllText(path);
+        //    Debug.Log(fileLoaded);
+        //    SaveSetup loadedSetup = JsonUtility.FromJson<SaveSetup>(fileLoaded);
+        //}
+        //else
+        //{
             File.WriteAllText(path, jsonFile);
-        }
+        //}
+    }
+
+    [NaughtyAttributes.Button]
+    public void SaveLevelTwo()
+    {
+        _saveSetup.lastLevel = 2;
+        Save();
     }
 
         
