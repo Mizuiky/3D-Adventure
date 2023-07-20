@@ -14,10 +14,15 @@ public class WorldManager : MonoBehaviour
 
     public static WorldManager Instance;
 
+    [SerializeField]
+    private SaveManager saveManager;
+
 
     public bool finishGamePlay = false;
     public PlayerMove Player { get { return player;  } }
     public ClothManager ClothManager { get { return clothManager; } }
+
+    public SaveManager SaveManager { get { return saveManager; } }
 
     public void Awake()
     {

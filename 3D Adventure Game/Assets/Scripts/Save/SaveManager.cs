@@ -49,9 +49,11 @@ public class SaveManager : MonoBehaviour
         Save();
     }
 
-        
-
-      
+    public void SaveLevel(int level)
+    {
+        _saveSetup.lastLevel = level;
+        Save();
+    } 
 }
 
 public class SaveSetup
