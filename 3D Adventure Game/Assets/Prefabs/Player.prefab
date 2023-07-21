@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 952325740}
   - component: {fileID: 952325741}
   - component: {fileID: 952325742}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MagneticTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7322,7 +7322,7 @@ GameObject:
   - component: {fileID: 8867790516756205205}
   - component: {fileID: 8867790516756205204}
   - component: {fileID: 8867790516756205207}
-  - component: {fileID: 3832806034142592133}
+  - component: {fileID: 8002813010521621359}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7396,7 +7396,7 @@ MonoBehaviour:
   flashColor:
   - {fileID: 5214768276946426715}
   - {fileID: 1475600331570625261}
-  healthBase: {fileID: 3832806034142592133}
+  healthBase: {fileID: 8002813010521621359}
   _isAlive: 0
   clothChanger: {fileID: 6067911059761957538}
 --- !u!136 &8867790516756205204
@@ -7432,7 +7432,7 @@ MonoBehaviour:
   uIGunUpdater:
   - {fileID: 0}
   flashColor: {fileID: 4934601943179448509}
---- !u!114 &3832806034142592133
+--- !u!114 &8002813010521621359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7441,7 +7441,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8867790516756203887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cb48df4c6508a442938cdabf5be725a, type: 3}
+  m_Script: {fileID: 11500000, guid: 94f42bbecf845ce47919657cc5a0780c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startLife: 50

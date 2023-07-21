@@ -68,7 +68,7 @@ public class PlayerMove : MonoBehaviour
     private CapsuleCollider collider;
 
     [Header("Life")]
-    public HealthBase healthBase;
+    public PlayerHealth healthBase;
 
     public Action<bool> OnEndGame;
     public bool _isAlive;
@@ -79,7 +79,7 @@ public class PlayerMove : MonoBehaviour
 
     public void OnValidate()
     {
-        if (healthBase == null) healthBase = GetComponent<HealthBase>();
+        if (healthBase == null) healthBase = GetComponent<PlayerHealth>();
         if (collider == null) collider = GetComponent<CapsuleCollider>();
     }
 
@@ -90,6 +90,7 @@ public class PlayerMove : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = Vector3.zero;
 
+        SaveManager.Instance.fileLoaded += SetPlayerHealth;
         healthBase.OnDamage += Damage;
         healthBase.OnKill += Kill;
     }
@@ -120,6 +121,24 @@ public class PlayerMove : MonoBehaviour
         _isAlive = true;
 
         collider.enabled = true;
+
+        Vector3 checkpoint = CheckPointManager.Instance.GetLastCheckPointPosition();
+
+        if (checkpoint != Vector3.zero)
+        {
+            Debug.Log("player position" + transform.position);
+            Debug.Log("player position local" + transform.localPosition);
+            SetPosition(checkpoint);
+            Debug.Log("new player position" + transform.position);
+            Debug.Log("new player position local" + transform.localPosition);
+        }
+
+        ChangeCloth(WorldManager.Instance.ClothManager.CurrentCloth, 2f);
+    }
+
+    private void OnDestroy()
+    {
+        SaveManager.Instance.fileLoaded -= SetPlayerHealth;
     }
 
     void Update()
@@ -132,6 +151,19 @@ public class PlayerMove : MonoBehaviour
 
             RotateToSide();
         }        
+    }
+
+    private void SetPlayerHealth(SaveSetup setup)
+    {
+        if(setup.PlayerHealth != 0)
+        {
+            healthBase.ChangeLife((int)setup.PlayerHealth);
+        }       
+    }
+
+    private void SetPosition(Vector3 position)
+    {
+        gameObject.transform.localPosition = position;
     }
 
     private void PlayerInput()
@@ -211,6 +243,7 @@ public class PlayerMove : MonoBehaviour
         EffectManager.Instance.ChangeVinhetColor();
 
         ScreenShake.Instance.Shake(1f, 1f, 0.5f, 0);
+        SaveManager.Instance.SavePlayerHealth((int)h._currentLife);
     }
 
     public void Kill(HealthBase h)

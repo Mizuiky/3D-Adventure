@@ -27,11 +27,13 @@ namespace cloth
         public void ChangeCloth(ClothSetup setup)
         {
             mesh.materials[0].SetTexture(shaderIdName, setup.texture);
+            WorldManager.Instance.ClothManager.SaveCurrentClothType(setup.type);
         }
 
         public void ResetCloth()
         {
             mesh.materials[0].SetTexture(shaderIdName, defaultTexture);
+            WorldManager.Instance.ClothManager.SaveCurrentClothType(ClothType.DEFAULT);
         }
     }
 }

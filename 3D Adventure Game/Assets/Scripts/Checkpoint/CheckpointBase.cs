@@ -15,8 +15,6 @@ public class CheckpointBase : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.DeleteKey("CheckpointKey");
-
         TurnOff();
     }
 

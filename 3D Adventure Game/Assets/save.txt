@@ -1,6 +1,9 @@
 {
-    "lastLevel": 1,
-    "playerName": "Priscila",
-    "coins": 6,
-    "health": 0.0
+    "lastLevel": 0,
+    "playerName": "",
+    "coins": 12,
+    "lifePack": 0.0,
+    "PlayerHealth": 0.0,
+    "lastCheckpoint": 2,
+    "clothType": 0
 }

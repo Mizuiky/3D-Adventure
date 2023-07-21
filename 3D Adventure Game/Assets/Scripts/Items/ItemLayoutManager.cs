@@ -8,7 +8,7 @@ namespace Items
     {
         public List<ItemLayout> itemsLayout;
 
-        public void Start()
+        public void Awake()
         {
             LoadItems();
         }

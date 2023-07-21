@@ -13,8 +13,9 @@ namespace Items
 
         private ItemSetup _currentSetup;
 
-        public void Start()
+        public void Awake()
         {
+            Debug.Log("Item Layout");
             ItemManager.Instance.OnChangeUI += UpdateUI;
         }
 

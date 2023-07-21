@@ -11,8 +11,23 @@ public class CheckPointManager : Singleton<CheckPointManager>
 
     private string checkPointKey = "CheckpointKey";
 
-    public void Start()
+    [SerializeField]
+    private GameObject checkpointContainer;
+
+    public override void Awake()
     {
+        base.Awake();
+        SaveManager.Instance.fileLoaded += SetCurrentLastCheckpoint;
+    }
+
+    private void OnDestroy()
+    {
+        SaveManager.Instance.fileLoaded -= SetCurrentLastCheckpoint;
+    }
+
+    private void SetCurrentLastCheckpoint(SaveSetup setup)
+    {
+        lastCheckpoint = setup.lastCheckpoint;
     }
 
     public void SaveCheckpoint(int index)
@@ -21,6 +36,7 @@ public class CheckPointManager : Singleton<CheckPointManager>
         {
             PlayerPrefs.SetInt(checkPointKey, index);
             lastCheckpoint = index;
+            SaveManager.Instance.SaveLastCheckpoint(lastCheckpoint);
         }           
     }
 
@@ -29,8 +45,12 @@ public class CheckPointManager : Singleton<CheckPointManager>
         CheckpointBase checkpoint = checkpoints.Find(i => i.key == lastCheckpoint);
 
         if(checkpoint != null)
-            return checkpoint.respawPoint.position;
+        {
+            Debug.Log("get last checkpoint" + checkpoint.key);
 
+            return checkpoint.respawPoint.position;
+        }
+           
         return Vector3.zero;
     }
 }

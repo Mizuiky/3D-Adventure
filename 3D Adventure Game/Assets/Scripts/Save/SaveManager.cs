@@ -4,16 +4,26 @@ using UnityEngine;
 using NaughtyAttributes;
 using System.IO;
 using Items;
+using cloth;
+using System;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : Singleton<SaveManager>
 {
+    [SerializeField]
     private SaveSetup _saveSetup;
 
-    public void Awake()
+    private string path = Application.dataPath + "/save.txt";
+
+    public Action<SaveSetup> fileLoaded;
+
+    public SaveSetup CurrentSave
     {
-        _saveSetup = new SaveSetup();
-        _saveSetup.lastLevel = 1;
-        _saveSetup.playerName = "Priscila";
+        get { return _saveSetup;  }
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -27,28 +37,42 @@ public class SaveManager : MonoBehaviour
     }
 
     public void SaveFile(string jsonFile)
-    {
-        string path = Application.dataPath + "/save.txt";
-        string fileLoaded = "";
-
-        //if (File.Exists(path))
-        //{
-        //    Debug.Log("File Exist");
-        //    fileLoaded = File.ReadAllText(path);
-        //    Debug.Log(fileLoaded);
-        //    SaveSetup loadedSetup = JsonUtility.FromJson<SaveSetup>(fileLoaded);
-        //}
-        //else
-        //{
-            File.WriteAllText(path, jsonFile);
-        //}
+    {         
+        File.WriteAllText(path, jsonFile);      
     }
 
     [NaughtyAttributes.Button]
-    public void SaveLevelTwo()
+    public void Load()
     {
-        _saveSetup.lastLevel = 2;
-        Save();
+        string file = "";
+
+        if(File.Exists(path))
+        {
+            file = File.ReadAllText(path);
+            _saveSetup = JsonUtility.FromJson<SaveSetup>(file);
+        }
+        else
+        {
+            CreateNewSave();
+            Save();
+        }
+    }
+
+    public void LoadFromFile()
+    {
+        fileLoaded?.Invoke(_saveSetup);
+    }
+
+    private void CreateNewSave()
+    {
+        _saveSetup = new SaveSetup();
+        _saveSetup.lastLevel = 0;
+        _saveSetup.playerName = "";
+        _saveSetup.coins = 0;
+        _saveSetup.lifePack = 0;
+        _saveSetup.PlayerHealth = 100f;
+        _saveSetup.lastCheckpoint = 0;
+        _saveSetup.clothType = ClothType.DEFAULT;
     }
 
     public void SaveLevel(int level)
@@ -56,19 +80,42 @@ public class SaveManager : MonoBehaviour
         _saveSetup.lastLevel = level;
         SaveItems();
         Save();     
-    } 
+    }
 
     public void SaveItems()
     {
         _saveSetup.coins = ItemManager.Instance.GetByType(ItemType.Coin).so.value;
-        _saveSetup.health = ItemManager.Instance.GetByType(ItemType.Life_Pack).so.value;
+        _saveSetup.lifePack = ItemManager.Instance.GetByType(ItemType.Life_Pack).so.value;
+        Save();
+    }
+
+    public void SaveLastCheckpoint(int checkpoint)
+    {
+        _saveSetup.lastCheckpoint = checkpoint;
+        Save();
+    }
+
+    public void SaveClothType(ClothType type)
+    {
+        _saveSetup.clothType = type;
+        Save();
+    }
+
+    public void SavePlayerHealth(int health)
+    {
+        _saveSetup.PlayerHealth = health;
+        Save();
     }
 }
 
+[System.Serializable]
 public class SaveSetup
 {
     public int lastLevel;
     public string playerName;
     public int coins;
-    public float health;
+    public float lifePack;
+    public float PlayerHealth;
+    public int lastCheckpoint;
+    public ClothType clothType;
 }

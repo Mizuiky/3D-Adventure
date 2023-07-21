@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using NaughtyAttributes;
 public class HealthBase : MonoBehaviour, IDamageble
 {
     [SerializeField]
-    private int _startLife;
+    protected int _startLife;
 
     public float _currentLife;
 
@@ -64,6 +64,15 @@ public class HealthBase : MonoBehaviour, IDamageble
             Kill();    
     }
 
+    [NaughtyAttributes.Button]
+    public void KillEvent()
+    {
+        _currentLife = 0;
+        UpdateUi(_currentLife);
+
+        Kill();
+    }
+
     public void Damage(float value, Vector3 dir)
     {
         Debug.Log("damage 2");
@@ -82,7 +91,7 @@ public class HealthBase : MonoBehaviour, IDamageble
             Kill();
     }
 
-    private void UpdateUi(float life)
+    protected void UpdateUi(float life)
     {
         if(uiUpdater != null)
         {
