@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using cloth;
+using NaughtyAttributes;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMove : MonoBehaviour
@@ -90,7 +91,7 @@ public class PlayerMove : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = Vector3.zero;
 
-        SaveManager.Instance.fileLoaded += SetPlayerHealth;
+        SaveManager.Instance.fileLoaded += LoadPlayerHealth;
         healthBase.OnDamage += Damage;
         healthBase.OnKill += Kill;
     }
@@ -128,7 +129,9 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("player position" + transform.position);
             Debug.Log("player position local" + transform.localPosition);
+
             SetPosition(checkpoint);
+
             Debug.Log("new player position" + transform.position);
             Debug.Log("new player position local" + transform.localPosition);
         }
@@ -136,9 +139,16 @@ public class PlayerMove : MonoBehaviour
         ChangeCloth(WorldManager.Instance.ClothManager.CurrentCloth, 2f);
     }
 
+    
+    [NaughtyAttributes.Button]
+    public void SetPosition()
+    {
+        transform.position = new Vector3(193.25f, -1.40f, -27.68f);
+    }
+
     private void OnDestroy()
     {
-        SaveManager.Instance.fileLoaded -= SetPlayerHealth;
+        SaveManager.Instance.fileLoaded -= LoadPlayerHealth;
     }
 
     void Update()
@@ -153,7 +163,7 @@ public class PlayerMove : MonoBehaviour
         }        
     }
 
-    private void SetPlayerHealth(SaveSetup setup)
+    private void LoadPlayerHealth(SaveSetup setup)
     {
         if(setup.PlayerHealth != 0)
         {
@@ -163,7 +173,7 @@ public class PlayerMove : MonoBehaviour
 
     private void SetPosition(Vector3 position)
     {
-        gameObject.transform.localPosition = position;
+        transform.position = position;
     }
 
     private void PlayerInput()
@@ -287,7 +297,7 @@ public class PlayerMove : MonoBehaviour
 
         if(checkpoint != Vector3.zero)
         {
-            transform.position = checkpoint;
+            transform.localPosition = checkpoint;
         }        
 
         OnEndGame?.Invoke(false);

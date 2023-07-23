@@ -13,6 +13,10 @@ public class CheckpointBase : MonoBehaviour
 
     public Transform respawPoint;
 
+    public Transform checkpointParent;
+
+    private Vector3 checkPointPosition;
+
     private void Start()
     {
         TurnOff();
@@ -40,5 +44,15 @@ public class CheckpointBase : MonoBehaviour
     private void TurnOff()
     {
         mesh.material.SetColor("_EmissionColor", Color.black);
+    }
+
+    public Vector3 GetCheckpointPosition()
+    {
+        Vector3 localPosition = respawPoint.localPosition;
+        Vector3 globalPosition = checkpointParent.TransformPoint(localPosition);
+
+        checkPointPosition = globalPosition;
+
+        return globalPosition;
     }
 }

@@ -48,7 +48,9 @@ public class CheckPointManager : Singleton<CheckPointManager>
         {
             Debug.Log("get last checkpoint" + checkpoint.key);
 
-            return checkpoint.respawPoint.position;
+            Vector3 position = checkpoint.GetCheckpointPosition();
+
+            return position;
         }
            
         return Vector3.zero;

@@ -1718,8 +1718,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399211937}
-  m_LocalRotation: {x: -0.0008065049, y: 0.99643135, z: -0.009583152, w: -0.08385831}
-  m_LocalPosition: {x: 14.57514, y: -11.866586, z: 8.517173}
+  m_LocalRotation: {x: -0.00080650486, y: 0.99643135, z: -0.009583154, w: -0.08385827}
+  m_LocalPosition: {x: 5.314114, y: -12.366586, z: 1.5181806}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3282,8 +3282,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775153930}
-  m_LocalRotation: {x: 0.11228324, y: 0.004404448, z: -0.0004976988, w: 0.9936664}
-  m_LocalPosition: {x: 9.80132, y: -4.387933, z: -28.511095}
+  m_LocalRotation: {x: 0.11228331, y: 0.0044045, z: -0.0004977044, w: 0.9936664}
+  m_LocalPosition: {x: 0.540293, y: -4.887933, z: -35.510075}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4914,7 +4914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002774423}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0, z: -6.5}
+  m_LocalPosition: {x: -11.2, y: 2.4, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6488,6 +6488,7 @@ MonoBehaviour:
   key: 1
   mesh: {fileID: 400219142}
   respawPoint: {fileID: 1612939727}
+  checkpointParent: {fileID: 166632055}
 --- !u!135 &1281990046
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7411,8 +7412,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
-  m_LocalRotation: {x: 0.14840344, y: 0.045420606, z: -0.006823412, w: 0.9878597}
-  m_LocalPosition: {x: 202.12, y: 8.900001, z: -87.3}
+  m_LocalRotation: {x: 0.14840348, y: 0.045420617, z: -0.0068234145, w: 0.9878597}
+  m_LocalPosition: {x: 192.37, y: 8.400001, z: -93.59999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13056,7 +13057,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612939726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0, z: -0.9000001}
+  m_LocalPosition: {x: -7.1, y: 0, z: -0.9000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14592,15 +14593,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8867790516756205203, guid: de5751878d7f112409e8460985aa7030, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.6
+      value: 38.65
       objectReference: {fileID: 0}
     - target: {fileID: 8867790516756205203, guid: de5751878d7f112409e8460985aa7030, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.18
+      value: -0.28
       objectReference: {fileID: 0}
     - target: {fileID: 8867790516756205203, guid: de5751878d7f112409e8460985aa7030, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.85
+      value: -14.11
       objectReference: {fileID: 0}
     - target: {fileID: 8867790516756205203, guid: de5751878d7f112409e8460985aa7030, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14673,7 +14674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799399130}
   m_LocalRotation: {x: -0, y: 0.01745245, z: -0, w: 0.99984777}
-  m_LocalPosition: {x: 202.48108, y: -2.606586, z: -75.50829}
+  m_LocalPosition: {x: 192.73108, y: -3.106586, z: -73.53616}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15511,8 +15512,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908481222}
-  m_LocalRotation: {x: 0.14855395, y: 0.009093061, z: -0.0013660253, w: 0.9888616}
-  m_LocalPosition: {x: 10.859924, y: -4.256585, z: -24.093714}
+  m_LocalRotation: {x: 0.148554, y: 0.009093072, z: -0.0013660258, w: 0.9888616}
+  m_LocalPosition: {x: 1.5988977, y: -4.756585, z: -31.092695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16076,6 +16077,7 @@ MonoBehaviour:
   key: 2
   mesh: {fileID: 120617227}
   respawPoint: {fileID: 1975474037}
+  checkpointParent: {fileID: 387988032}
 --- !u!135 &1975159072
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -16113,7 +16115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975474036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.96, y: 0, z: -9.48}
+  m_LocalPosition: {x: -2.96, y: 0, z: -10.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16496,6 +16498,7 @@ MonoBehaviour:
   key: 0
   mesh: {fileID: 1825850485}
   respawPoint: {fileID: 1002774424}
+  checkpointParent: {fileID: 28756630}
 --- !u!1001 &2071971932
 PrefabInstance:
   m_ObjectHideFlags: 0

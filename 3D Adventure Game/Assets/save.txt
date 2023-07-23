@@ -1,9 +1,9 @@
 {
     "lastLevel": 0,
     "playerName": "",
-    "coins": 12,
+    "coins": 6,
     "lifePack": 0.0,
-    "PlayerHealth": 0.0,
-    "lastCheckpoint": 2,
-    "clothType": 0
+    "PlayerHealth": 100.0,
+    "lastCheckpoint": 1,
+    "clothType": 1
 }
