@@ -25,7 +25,7 @@ namespace Items
 
         public void Start()
         {
-            Reset();
+           
         }
 
         private void OnDestroy()
@@ -40,8 +40,33 @@ namespace Items
 
         private void LoadItemsFromSave(SaveSetup setup)
         {
-            AddByType(ItemType.Coin, setup.coins);
-            AddByType(ItemType.Life_Pack, (int)setup.lifePack);
+            /**** its not optimized, need to check out later  ****/
+            loadCoins(setup);
+            loadLifePack(setup);
+        }
+
+        public void loadCoins(SaveSetup setup)
+        {
+            ItemSetup item = itemSetup.Find(x => x.itemType == ItemType.Coin);
+
+            if (item != null)
+            {
+                item.so.value = setup.coins;
+            }
+
+            OnChangeUI?.Invoke(item);
+        }
+
+        public void loadLifePack(SaveSetup setup)
+        {
+            ItemSetup item = itemSetup.Find(x => x.itemType == ItemType.Life_Pack);
+
+            if (item != null)
+            {
+                item.so.value = (int)setup.lifePack;
+            }
+
+            OnChangeUI?.Invoke(item);
         }
 
         public void AddByType(ItemType type, int amount = 1)
@@ -52,8 +77,6 @@ namespace Items
             {
                 item.so.value += amount;
             }
-
-            Debug.Log("load items");
 
             OnChangeUI?.Invoke(item);
 
