@@ -70,7 +70,8 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup.playerName = "";
         _saveSetup.coins = 0;
         _saveSetup.lifePack = 0;
-        _saveSetup.PlayerHealth = 100f;
+        _saveSetup.CurrentPlayerHealth = 100;
+        _saveSetup.StartLife = 100;
         _saveSetup.lastCheckpoint = 0;
         _saveSetup.clothType = ClothType.DEFAULT;
     }
@@ -103,7 +104,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SavePlayerHealth(int health)
     {
-        _saveSetup.PlayerHealth = health;
+        _saveSetup.CurrentPlayerHealth = health;
         Save();
     }
 }
@@ -115,7 +116,8 @@ public class SaveSetup
     public string playerName;
     public int coins;
     public float lifePack;
-    public float PlayerHealth;
+    public float CurrentPlayerHealth;
+    public int StartLife;
     public int lastCheckpoint;
     public ClothType clothType;
 }

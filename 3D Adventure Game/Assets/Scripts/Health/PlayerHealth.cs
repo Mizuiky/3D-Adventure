@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class PlayerHealth : HealthBase
 {
-    public void ChangeLife(int life)
+    public void LoadLife(int life, int startLife)
     {
-        if(life > 0)
+        _startLife = startLife;
+
+        if(life <=0)
         {
-            _currentLife = (float)life / (float)_startLife;
+            _currentLife = startLife;
         }
         else
         {
-            _currentLife = _startLife;
+            _currentLife = life;
         }
-
-        UpdateUi(_currentLife);       
+         
+        UpdateUi(_currentLife / _startLife);       
     }
 }

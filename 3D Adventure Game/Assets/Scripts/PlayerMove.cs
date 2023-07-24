@@ -78,6 +78,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private ClothChanger clothChanger;
 
+    private Coroutine _currentClothCorrotine;
+
     public void OnValidate()
     {
         if (healthBase == null) healthBase = GetComponent<PlayerHealth>();
@@ -165,15 +167,12 @@ public class PlayerMove : MonoBehaviour
 
     private void LoadPlayerHealth(SaveSetup setup)
     {
-        if(setup.PlayerHealth != 0)
-        {
-            healthBase.ChangeLife((int)setup.PlayerHealth);
-        }       
+       healthBase.LoadLife((int)setup.CurrentPlayerHealth, setup.StartLife);             
     }
 
     private void SetPosition(Vector3 position)
     {
-        transform.position = position;
+        _rb.position = position;
     }
 
     private void PlayerInput()
@@ -297,10 +296,10 @@ public class PlayerMove : MonoBehaviour
 
         if(checkpoint != Vector3.zero)
         {
-            transform.localPosition = checkpoint;
+            SetPosition(checkpoint);
         }        
 
-        OnEndGame?.Invoke(false);
+        //OnEndGame?.Invoke(false);
     }
 
     public void Damage(int value, Vector3 dir)
@@ -326,7 +325,9 @@ public class PlayerMove : MonoBehaviour
 
     public void ChangeCloth(ClothSetup setup, float duration)
     {
-        StartCoroutine(ChangeClothCoroutine(setup, duration));
+        if (_currentClothCorrotine != null) StopCoroutine(_currentClothCorrotine);
+
+        _currentClothCorrotine = StartCoroutine(ChangeClothCoroutine(setup, duration));
     }
 
     public IEnumerator ChangeClothCoroutine(ClothSetup setup, float duration)
