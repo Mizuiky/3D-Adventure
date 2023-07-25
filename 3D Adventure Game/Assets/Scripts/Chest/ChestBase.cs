@@ -18,6 +18,8 @@ public class ChestBase : MonoBehaviour
 
     private bool chestOpened;
 
+    public SfxType sfxType;
+
     [Space]
     public ChestItemBase chestItem;
     public float showItemDelay = 2f;
@@ -59,12 +61,18 @@ public class ChestBase : MonoBehaviour
         particle?.Play();
     }
 
+    public void PlaySfx()
+    {
+        SfxPool.Instance.Play(sfxType);
+    }
+
     public virtual void OpenChest()
     {
         if (chestOpened) return;
 
         if(chestAnimator != null)
         {
+            PlaySfx();
             chestAnimator.SetTrigger(chestTrigger);
         }
 

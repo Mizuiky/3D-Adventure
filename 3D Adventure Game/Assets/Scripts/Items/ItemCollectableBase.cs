@@ -16,6 +16,8 @@ namespace Items
 
         public ItemType itemType;
 
+        public SfxType sfxType;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(tagToCompare))
@@ -26,7 +28,9 @@ namespace Items
 
         public virtual void Collect()
         {
-            if(collider != null)
+            PlaySfx();
+
+            if (collider != null)
                 collider.enabled = false;
 
             if (graphicObject != null)
@@ -36,6 +40,11 @@ namespace Items
 
             OnCollect();
 
+        }
+
+        public void PlaySfx()
+        {
+            SfxPool.Instance.Play(sfxType);
         }
 
         private void HideOnCollect()

@@ -627,7 +627,8 @@ MonoBehaviour:
     playerName: 
     coins: 0
     lifePack: 0
-    PlayerHealth: 0
+    CurrentPlayerHealth: 0
+    StartLife: 0
     lastCheckpoint: 0
     clothType: 0
 --- !u!1 &1257442031

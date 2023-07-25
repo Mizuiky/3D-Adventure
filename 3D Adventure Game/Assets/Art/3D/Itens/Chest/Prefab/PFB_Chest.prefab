@@ -119,6 +119,7 @@ MonoBehaviour:
   arrowTrigger: Notify
   graphic: {fileID: 3893998540301743889}
   keyToOpen: 122
+  sfxType: 3
   chestItem: {fileID: 1590565552}
   showItemDelay: 1
   particle: {fileID: 5814806316410424506}
