@@ -3,7 +3,7 @@
     "playerName": "",
     "coins": 0,
     "lifePack": 0.0,
-    "CurrentPlayerHealth": 100.0,
+    "CurrentPlayerHealth": 80.0,
     "StartLife": 100,
     "lastCheckpoint": 0,
     "clothType": 0

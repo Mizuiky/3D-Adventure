@@ -11,6 +11,13 @@ namespace cloth
 
         public string tagToCompare = "Player";
 
+        public GameObject clothIcon;
+
+        private void Start()
+        {
+            clothIcon.SetActive(true);
+        }
+
         public void OnTriggerEnter(Collider other)
         {
             if(other.CompareTag(tagToCompare))
@@ -22,6 +29,8 @@ namespace cloth
         public virtual void Collect()
         {
             HideItem();
+
+            clothIcon.SetActive(false);
 
             ClothSetup setup = WorldManager.Instance.ClothManager.GetClothByType(type);
             WorldManager.Instance.Player.ChangeCloth(setup, duration);
