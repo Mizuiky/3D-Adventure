@@ -58,6 +58,12 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
+    public void StarGame()
+    {
+        CreateNewSave();
+        Save();
+    }
+
     public void LoadFromFile()
     {
         fileLoaded?.Invoke(_saveSetup);
