@@ -80,6 +80,9 @@ public class PlayerMove : MonoBehaviour
 
     private Coroutine _currentClothCorrotine;
 
+    [SerializeField]
+    private Transform CameraTransform;
+
     public void OnValidate()
     {
         if (healthBase == null) healthBase = GetComponent<PlayerHealth>();
@@ -213,6 +216,8 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         _movement = new Vector3(_horizontal, 0, _vertical);
+
+        _movement = Quaternion.AngleAxis(CameraTransform.transform.eulerAngles.y, Vector3.up) * _movement;
 
         _xVelocity = _movement * _playerSpeed * Time.deltaTime;
 
